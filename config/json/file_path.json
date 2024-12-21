@@ -1,0 +1,6 @@
+{
+    "item_path": "config/json/copy.json",
+    "settings_path": "config/json/settings.json",
+    "actual_parsing_file_path": "data/parsing_list_file/actual.json",
+    "Url_manager_icon_path": "Url_manager/icon_file.jpg"
+}

@@ -1,0 +1,22 @@
+[
+    {
+        "class": "Arcane",
+        "item": "Enigmatic Staff",
+        "tier_min": "4",
+        "tier_max": "5",
+        "enchant_min": "0",
+        "enchant_max": "1",
+        "days": "7",
+        "step_h": "0.5"
+    },
+    {
+        "class": "Cloth armor",
+        "item": "Scholar Robe",
+        "tier_min": "4",
+        "tier_max": "8",
+        "enchant_min": "0",
+        "enchant_max": "0",
+        "days": "7",
+        "step_h": "0.5"
+    }
+]

@@ -1,0 +1,1254 @@
+{
+    "Arcane": {
+        "Arcane Staff":{
+            "code_name": "MAIN_ARCANESTAFF",
+            "English": "Arcane Staff",
+            "Russian": "Мистический посох"
+        },
+        "Great Arcane Staff":{
+            "code_name": "2H_ARCANESTAFF",
+            "English": "Great Arcane Staff",
+            "Russian": "Большой мистический посох"
+        },
+        "Enigmatic Staff":{
+            "code_name": "2H_ENIGMATICSTAFF",
+            "English": "Enigmatic Staff",
+            "Russian": "Загадочный посох"
+        },
+        "Witchwork Staff":{
+            "code_name": "MAIN_ARCANESTAFF_UNDEAD",
+            "English": "Witchwork Staff",
+            "Russian": "Ведьмовской посох"
+        },
+        "Occult Staff":{
+            "code_name": "2H_ARCANESTAFF_HELL",
+            "English": "Occult Staff",
+            "Russian": "Оккультный посох"
+        },
+        "Malevolent Locus":{
+            "code_name": "2H_ENIGMATICORB_MORGANA",
+            "English": "Malevolent Locus",
+            "Russian": "Локус"
+        },
+        "Evensong":{
+            "code_name": "2H_ARCANE_RINGPAIR_AVALON",
+            "English": "Evensong",
+            "Russian": "Песнь заката"
+        },
+        "Astral Staff":{
+            "code_name": "2H_ARCANESTAFF_CRYSTAL",
+            "English": "Crystal Staff",
+            "Russian": "Кристальный посох"
+        }
+    },
+    "Axe":{
+        "Battleaxe":{
+            "code_name": "MAIN_AXE",
+            "English": "Battleaxe",
+            "Russian": "Боевой топор"
+        },
+        "Greataxe":{
+            "code_name": "2H_AXE",
+            "English": "Greataxe",
+            "Russian": "Большой топор"
+        },
+        "Halberd":{
+            "code_name": "2H_HALBERD",
+            "English": "Halberd",
+            "Russian": "Алебарда"
+        },
+        "Carrioncaller":{
+            "code_name": "2H_HALBERD_MORGANA",
+            "English": "Carrioncaller",
+            "Russian": "Падальщик"
+        },
+        "Infernal Scythe":{
+            "code_name": "2H_SCYTHE_HELL",
+            "English": "Infernal Scythe",
+            "Russian": "Адская коса"
+        },
+        "Bear Paws":{
+            "code_name": "2H_DUALAXE_KEEPER",
+            "English": "Bear Paws",
+            "Russian": "Медвежьи Лапы"
+        },
+        "Realmbreaker":{
+            "code_name": "2H_AXE_AVALON",
+            "English": "Realmbreaker",
+            "Russian": "Разрушитель миров"
+        },
+        "Crystal Reaper":{
+            "code_name": "2H_SCYTHE_CRYSTAL",
+            "English": "Crystal Reaper",
+            "Russian": "Кристальный жнец"
+        }
+
+    },
+    "Bow":{
+        "Bow":{
+            "code_name": "2H_BOW",
+            "English": "Bow",
+            "Russian": "Лук"
+        },
+        "Longbow":{
+            "code_name": "2H_LONGBOW",
+            "English": "Longbow",
+            "Russian": "Длинный лук"
+        },
+        "Warbow":{
+            "code_name": "2H_WARBOW",
+            "English": "Warbow",
+            "Russian": "Боевой лук"
+        },
+        "Whispering Bow":{
+            "code_name": "2H_LONGBOW_UNDEAD",
+            "English": "Whispering Bow",
+            "Russian": "Шепчущий лук"
+        },
+        "Wailing Bow":{
+            "code_name": "2H_BOW_HELL",
+            "English": "Wailing Bow",
+            "Russian": "Воющий лук"
+        },
+        "Bow of Badon":{
+            "code_name": "2H_BOW_KEEPER",
+            "English": "Bow of Badon",
+            "Russian": "Лук Бадона"
+        },
+        "Mistpiercer":{
+            "code_name": "2H_BOW_AVALON",
+            "English": "Mistpiercer",
+            "Russian": "Мистический Пронзатель"
+        }
+    },
+    "Crossbow":{
+        "Crossbow":{
+            "code_name": "2H_CROSSBOW",
+            "English": "Crossbow",
+            "Russian": "Крестовый арбалет"
+        },
+        "Light Crossbow":{
+            "code_name": "MAIN_1HCROSSBOW",
+            "English": "Light Crossbow",
+            "Russian": "Легкий арбалет"
+        },
+        "Heavy Crossbow":{
+            "code_name": "2H_CROSSBOWLARGE",
+            "English": "Heavy Crossbow",
+            "Russian": "Тяжелый арбалет"
+        },
+        "Weeping Repeater":{
+            "code_name": "2H_REPEATINGCROSSBOW_UNDEAD",
+            "English": "Weeping Repeater",
+            "Russian": "Плачущий арбалет"
+        },
+        "Boltcasters":{
+            "code_name": "2H_DUALCROSSBOW_HELL",
+            "English": "Boltcasters",
+            "Russian": "Самострелы"
+        },
+        "Siegebow":{
+            "code_name": "2H_CROSSBOWLARGE_MORGANA",
+            "English": "Siegebow",
+            "Russian": "Осадный арбалет"
+        },
+        "Energy Shaper":{
+            "code_name": "2H_CROSSBOW_CANNON_AVALON",
+            "English": "Energy Shaper",
+            "Russian": "Творец энергии"
+        }
+    },
+    "Cursed":{
+        "Cursed Staff":{
+            "code_name": "MAIN_CURSEDSTAFF",
+            "English": "Cursed Staff",
+            "Russian": "Проклятый посох"
+        },
+        "Great Cursed Staff":{
+            "code_name": "2H_CURSEDSTAFF",
+            "English": "Great Cursed Staff",
+            "Russian": "Большой проклятый посох"
+        },
+        "Demonic Staff":{
+            "code_name": "2H_DEMONICSTAFF",
+            "English": "Demonic Staff",
+            "Russian": "Демонический посох"
+        },
+        "Lifecurse Staff":{
+            "code_name": "MAIN_CURSEDSTAFF_UNDEAD",
+            "English": "Lifecurse Staff",
+            "Russian": "Гибельный посох"
+        },
+        "Cursed Skull":{
+            "code_name": "2H_SKULLORB_HELL",
+            "English": "Cursed Skull",
+            "Russian": "Проклятый череп"
+        },
+        "Damnation Staff":{
+            "code_name": "2H_CURSEDSTAFF_MORGANA",
+            "English": "Damnation Staff",
+            "Russian": "Посох обреченности"
+        },
+        "Shadowcaller":{
+            "code_name": "MAIN_CURSEDSTAFF_AVALON",
+            "English": "Shadowcaller",
+            "Russian": "Призыватель теней"
+        }
+    },
+    "Dagger":{
+        "Dagger":{
+            "code_name": "MAIN_DAGGER",
+            "English": "Dagger",
+            "Russian": "Кинжал"
+        },
+        "Dagger Pair":{
+            "code_name": "2H_DAGGERPAIR",
+            "English": "Dagger Pair",
+            "Russian": "Парные кинжалы"
+        },
+        "Claws":{
+            "code_name": "2H_CLAWPAIR",
+            "English": "Claws",
+            "Russian": "Когти"
+        },
+        "Bloodletter":{
+            "code_name": "MAIN_RAPIER_MORGANA",
+            "English": "Bloodletter",
+            "Russian": "Кровопускатель"
+        },
+        "Demonfang":{
+            "code_name": "MAIN_DAGGER_HELL",
+            "English": "Demonfang",
+            "Russian": "Клык демона"
+        },
+        "Deathgivers":{
+            "code_name": "2H_DUALSICKLE_UNDEAD",
+            "English": "Deathgivers",
+            "Russian": "Вестники смерти"
+        },
+        "Bridled Fury":{
+            "code_name": "2H_DAGGER_KATAR_AVALON",
+            "English": "Bridled Fury",
+            "Russian": "Укротитель ярости"
+        }
+    },
+    "Fire Staff":{
+        "Fire Staff":{
+            "code_name": "MAIN_FIRESTAFF",
+            "English": "Fire Staff",
+            "Russian": "Огненный посох"
+        },
+        "Great Fire Staff":{
+            "code_name": "2H_FIRESTAFF",
+            "English": "Great Fire Staff",
+            "Russian": "Большой огненный посох"
+        },
+        "Infernal Staff":{
+            "code_name": "2H_INFERNOSTAFF",
+            "English": "Infernal Staff",
+            "Russian": "Адский посох"
+        },
+        "Wildfire Staff":{
+            "code_name": "MAIN_FIRESTAFF_KEEPER",
+            "English": "Wildfire Staff",
+            "Russian": "Посох лесного пожара"
+        },
+        "Brimstone Staff":{
+            "code_name": "2H_FIRESTAFF_HELL",
+            "English": "Brimstone Staff",
+            "Russian": "Посох серы"
+        },
+        "Blazing Staff":{
+            "code_name": "2H_INFERNOSTAFF_MORGANA",
+            "English": "Blazing Staff",
+            "Russian": "Пылающий посох"
+        },
+        "Dawnsong":{
+            "code_name": "2H_FIRE_RINGPAIR_AVALON",
+            "English": "Dawnsong",
+            "Russian": "Песнь рассвета"
+        }
+    },
+    "Frost Staff":{
+        "Frost Staff":{
+            "code_name": "MAIN_FROSTSTAFF",
+            "English": "Frost Staff",
+            "Russian": "Морозный посох"
+        },
+        "Great Frost Staff":{
+            "code_name": "2H_FROSTSTAFF",
+            "English": "Great Frost Staff",
+            "Russian": "Большой морозный посох"
+        },
+        "Glacial Staff":{
+            "code_name": "2H_GLACIALSTAFF",
+            "English": "Glacial Staff",
+            "Russian": "Ледяной посох"
+        },
+        "Hoarfrost Staff":{
+            "code_name": "MAIN_FROSTSTAFF_KEEPER",
+            "English": "Hoarfrost Staff",
+            "Russian": "Посох инея"
+        },
+        "Icicle Staff":{
+            "code_name": "2H_ICEGAUNTLETS_HELL",
+            "English": "Icicle Staff",
+            "Russian": "Заледенелый посох"
+        },
+        "Permafrost Prism":{
+            "code_name": "2H_ICECRYSTAL_UNDEAD",
+            "English": "Permafrost Prism",
+            "Russian": "Призма вечного холода"
+        },
+        "Chillhowl":{
+            "code_name": "MAIN_FROSTSTAFF_AVALON",
+            "English": "Chillhowl",
+            "Russian": "Леденящий вой"
+        },
+        "Arctic Staff":{
+            "code_name": "2H_FROSTSTAFF_CRYSTAL",
+            "English": "Arctic Staff",
+            "Russian": "Снежный посох"
+        }
+    },
+    "Hammer":{
+        "Hammer":{
+            "code_name": "MAIN_HAMMER",
+            "English": "Hammer",
+            "Russian": "Молот"
+        },
+        "Polehammer":{
+            "code_name": "2H_POLEHAMMER",
+            "English": "Polehammer",
+            "Russian": "Чекан"
+        },
+        "Great Hammer":{
+            "code_name": "2H_HAMMER",
+            "English": "Great Hammer",
+            "Russian": "Большой молот"
+        },
+        "Tombhammer":{
+            "code_name": "2H_HAMMER_UNDEAD",
+            "English": "Tombhammer",
+            "Russian": "Могильный молот"
+        },
+        "Forge Hammers":{
+            "code_name": "2H_DUALHAMMER_HELL",
+            "English": "Forge Hammers",
+            "Russian": "Молоты кузни"
+        },
+        "Grovekeeper":{
+            "code_name": "2H_RAM_KEEPER",
+            "English": "Grovekeeper",
+            "Russian": "Хранитель рощи"
+        },
+        "Hand of Justice":{
+            "code_name": "2H_HAMMER_AVALON",
+            "English": "Hand of Justice",
+            "Russian": "Длань правосудия"
+        }
+    },
+    "Holy Staff":{
+        "Holy Staff":{
+            "code_name": "MAIN_HOLYSTAFF",
+            "English": "Holy Staff",
+            "Russian": "Священный посох"
+        },
+        "Great Holy Staff":{
+            "code_name": "2H_HOLYSTAFF",
+            "English": "Great Holy Staff",
+            "Russian": "Большой священный посох"
+        },
+        "Divine Staff":{
+            "code_name": "2H_DIVINESTAFF",
+            "English": "Divine Staff",
+            "Russian": "Божественный посох"
+        },
+        "Lifetouch Staff":{
+            "code_name": "MAIN_HOLYSTAFF_MORGANA",
+            "English": "Lifetouch Staff",
+            "Russian": "Посох жизни"
+        },
+        "Fallen Staff":{
+            "code_name": "2H_HOLYSTAFF_HELL",
+            "English": "Fallen Staff",
+            "Russian": "Посох падших"
+        },
+        "Redemption Staff":{
+            "code_name": "2H_HOLYSTAFF_UNDEAD",
+            "English": "Redemption Staff",
+            "Russian": "Посох искупления"
+        },
+        "Hallowfall":{
+            "code_name": "MAIN_HOLYSTAFF_AVALON ",
+            "English": "Hallowfall",
+            "Russian": "Благодатный посох"
+        }
+    },
+    "Mace":{
+        "Mace":{
+            "code_name": "MAIN_MACE",
+            "English": "Mace",
+            "Russian": "Булава"
+        },
+        "Heavy Mace":{
+            "code_name": "2H_MACE",
+            "English": "Heavy Mace",
+            "Russian": "Тяжелая булава"
+        },
+        "Morning Star":{
+            "code_name": "2H_FLAIL",
+            "English": "Morning Star",
+            "Russian": "Моргенштерн"
+        },
+        "Bedrock Mace":{
+            "code_name": "MAIN_ROCKMACE_KEEPER",
+            "English": "Bedrock Mace",
+            "Russian": "Каменная булава"
+        },
+        "Incubus Mace":{
+            "code_name": "MAIN_MACE_HELL",
+            "English": "Incubus Mace",
+            "Russian": "Булава инкуба"
+        },
+        "Camlann Mace":{
+            "code_name": "2H_CAMLANN_HELL",
+            "English": "Camlann Mace",
+            "Russian": "Булава Камланна"
+        },
+        "Oathkeepers":{
+            "code_name": "2H_OATHKEEPERS_HELL",
+            "English": "Oathkeepers",
+            "Russian": "Хранители клятвы"
+        }
+    },
+    "Nature Staff":{
+        "Nature Staff":{
+            "code_name": "MAIN_NATURESTAFF",
+            "English": "Nature Staff",
+            "Russian": "Древесный посох"
+        },
+        "Great Nature Staff":{
+            "code_name": "2H_NATURESTAFF",
+            "English": "Great Nature Staff",
+            "Russian": "Большой древесный посох"
+        },
+        "Wild Staff":{
+            "code_name": "2H_WILDSTAFF",
+            "English": "Wild Staff",
+            "Russian": "Дикий посох"
+        },
+        "Druidic Staff":{
+            "code_name": "MAIN_NATURESTAFF_KEEPER",
+            "English": "Druidic Staff",
+            "Russian": "Друидский посох"
+        },
+        "Blight Staff":{
+            "code_name": "2H_NATURESTAFF_HELL",
+            "English": "Blight Staff",
+            "Russian": "Посох порчи"
+        },
+        "Rampant Staff":{
+            "code_name": "2H_NATURESTAFF_KEEPER",
+            "English": "Rampant Staff",
+            "Russian": "Неудержимый посох"
+        },
+        "Ironroot Staff":{
+            "code_name": "MAIN_NATURESTAFF_AVALON",
+            "English": "Ironroot Staff",
+            "Russian": "Посох железного корня"
+        }
+    },
+    "Quarter Staff":{
+        "Quarterstaff":{
+            "code_name": "2H_QUARTERSTAFF",
+            "English": "Quarterstaff",
+            "Russian": "Боевой шест"
+        },
+        "Iron-clad Staff":{
+            "code_name": "2H_IRONCLADEDSTAFF",
+            "English": "Iron-clad Staff",
+            "Russian": "Железный посох"
+        },
+        "Double Bladed Staff":{
+            "code_name": "2H_DOUBLEBLADEDSTAFF",
+            "English": "Double Bladed Staff",
+            "Russian": "Острый шест"
+        },
+        "Black Monk Stave":{
+            "code_name": "2H_COMBATSTAFF_MORGANA",
+            "English": "Black Monk Stave",
+            "Russian": "Посох черного монаха"
+        },
+        "Soulscythe":{
+            "code_name": "2H_TWINSCYTHE_HELL",
+            "English": "Soulscythe",
+            "Russian": "Коса душ"
+        },
+        "Staff of Balance":{
+            "code_name": "2H_ROCKSTAFF_KEEPER",
+            "English": "Staff of Balance",
+            "Russian": "Посох равновесия"
+        },
+        "Grailseeker":{
+            "code_name": "2H_QUARTERSTAFF_AVALON",
+            "English": "Grailseeker",
+            "Russian": "Искатель Грааля"
+        },
+        "Phantom Twinblade":{
+            "code_name": "2H_DOUBLEBLADEDSTAFF_CRYSTAL",
+            "English": "Phantom Twinblade",
+            "Russian": "Парный призрачный клинок"
+        }
+    },
+    "Spear":{
+        "Spear":{
+            "code_name": "MAIN_SPEAR",
+            "English": "Spear",
+            "Russian": "Копье"
+        },
+        "Pike":{
+            "code_name": "2H_SPEAR",
+            "English": "Pike",
+            "Russian": "Пика"
+        },
+        "Glaive":{
+            "code_name": "2H_GLAIVE",
+            "English": "Glaive",
+            "Russian": "Глефа"
+        },
+        "Heron Spear":{
+            "code_name": "MAIN_SPEAR_KEEPER",
+            "English": "Heron Spear",
+            "Russian": "Копье цапли"
+        },
+        "Spirithunter":{
+            "code_name": "2H_HARPOON_HELL",
+            "English": "Spirithunter",
+            "Russian": "Охотник за душами"
+        },
+        "Trinity Spear":{
+            "code_name": "2H_TRIDENT_UNDEAD",
+            "English": "Trinity Spear",
+            "Russian": "Трезубец"
+        },
+        "Daybreaker":{
+            "code_name": "MAIN_SPEAR_LANCE_AVALON",
+            "English": "Daybreaker",
+            "Russian": "Копье рассвета"
+        },
+        "Rift Glaive":{
+            "code_name": "2H_GLAIVE_CRYSTA",
+            "English": "Rift Glaive",
+            "Russian": "Глефа разлома"
+        }
+    },
+    "Sword":{
+        "Broadsword":{
+            "code_name": "MAIN_SWORD",
+            "English": "Broadsword",
+            "Russian": "Палаш"
+        },
+        "Claymore":{
+            "code_name": "2H_CLAYMORE",
+            "English": "Claymore",
+            "Russian": "Клеймор"
+        },
+        "Dual Swords":{
+            "code_name": "2H_DUALSWORD",
+            "English": "Dual Swords",
+            "Russian": "Парные мечи"
+        },
+        "Clarent Blade":{
+            "code_name": "MAIN_SCIMITAR_MORGANA",
+            "English": "Clarent Blade",
+            "Russian": "Королевский меч"
+        },
+        "Carving Sword":{
+            "code_name": "2H_CLEAVER_HELL",
+            "English": "Carving Sword",
+            "Russian": "Меч резни"
+        },
+        "Galatine Pair":{
+            "code_name": "2H_DUALSCIMITAR_UNDEAD",
+            "English": "Galatine Pair",
+            "Russian": "Парные галатины"
+        },
+        "Kingmaker":{
+            "code_name": "2H_CLAYMORE_AVALON",
+            "English": "Kingmaker",
+            "Russian": "Царетворец"
+        },
+        "Infinity Blade":{
+            "code_name": "MAIN_SWORD_CRYSTAL",
+            "English": "Infinity Blade",
+            "Russian": "Клинок бесконечности"
+        }
+    },
+    "War Gloves":{
+        "Brawler Gloves":{
+            "code_name": "2H_KNUCKLES_SET1",
+            "English": "Brawler Gloves",
+            "Russian": "Перчатки крушителя"
+        },
+        "Battle Bracers":{
+            "code_name": "2H_KNUCKLES_SET2",
+            "English": "Battle Bracers",
+            "Russian": "Боевые наручи"
+        },
+        "Spiked Gauntlets":{
+            "code_name": "2H_KNUCKLES_SET3",
+            "English": "Spiked Gauntlets",
+            "Russian": "Шипастые рукавицы"
+        },
+        "Ursine Maulers":{
+            "code_name": "2H_KNUCKLES_KEEPER",
+            "English": "Ursine Maulers",
+            "Russian": "Медвежьи перчатки"
+        },
+        "Hellfire Hands":{
+            "code_name": "2H_KNUCKLES_HELL",
+            "English": "Hellfire Hands",
+            "Russian": "Адские длани"
+        },
+        "Ravenstrike Cestus":{
+            "code_name": "2H_KNUCKLES_MORGANA",
+            "English": "Ravenstrike Cestus",
+            "Russian": "Вороний цестус"
+        },
+        "Fists of Avalon":{
+            "code_name": "2H_KNUCKLES_AVALON",
+            "English": "Fists of Avalon",
+            "Russian": "Кулаки Авалона"
+        }
+    },
+    "Shapeshifter Staff":{
+        "Prowling Staff":{
+            "code_name": "2H_SHAPESHIFTER_SET1",
+            "English": "Prowling Staff",
+            "Russian": "Посох бродяги"
+        },
+        "Rootbound Staff":{
+            "code_name": "2H_SHAPESHIFTER_SET2",
+            "English": "Rootbound Staff",
+            "Russian": "Непреодолимый посох"
+        },
+        "Primal Staff":{
+            "code_name": "2H_SHAPESHIFTER_SET3",
+            "English": "Primal Staff",
+            "Russian": "Первобытный посох"
+        },
+        "Bloodmoon Staff":{
+            "code_name": "2H_SHAPESHIFTER_MORGANA",
+            "English": "Bloodmoon Staff",
+            "Russian": "Посох Кровавой луны"
+        },
+        "Hellspawn Staff":{
+            "code_name": "2H_SHAPESHIFTER_HELL",
+            "English": "Hellspawn Staff",
+            "Russian": "Посох порождений Ада"
+        },
+        "Earthrune Staff":{
+            "code_name": "2H_SHAPESHIFTER_KEEPER",
+            "English": "Earthrune Staff",
+            "Russian": "Рунный посох Земли"
+        },
+        "Lightcaller":{
+            "code_name": "2H_SHAPESHIFTER_AVALON",
+            "English": "Lightcaller",
+            "Russian": "Светоч"
+        }
+
+    },
+
+    "Cloth helmet":{
+        "Scholar Cowl":{
+            "code_name": "HEAD_CLOTH_SET1",
+            "English": "Scholar Cowl",
+            "Russian": "Колпея ученого"
+        },
+        "Cleric Cowl":{
+            "code_name": "HEAD_CLOTH_SET2",
+            "English": "Cleric Cowl",
+            "Russian": "Колпак клирика"
+        },
+        "Mage Cowl":{
+            "code_name": "HEAD_CLOTH_SET3",
+            "English": "Mage Cowl",
+            "Russian": "Колпак чародея"
+        },
+        "Druid Cowl":{
+            "code_name": "HEAD_CLOTH_KEEPER",
+            "English": "Druid Cowl",
+            "Russian": "Колпак друида"
+        },
+        "Fiend Cowl":{
+            "code_name": "HEAD_CLOTH_HELL",
+            "English": "Fiend Cowl",
+            "Russian": "Дьявольский колпак"
+        },
+        "Cultist Cowl":{
+            "code_name": "HEAD_CLOTH_MORGANA",
+            "English": "Cultist Cowl",
+            "Russian": "Колпак культиста"
+        },
+        "Royal Cowl":{
+            "code_name": "HEAD_CLOTH_ROYAL",
+            "English": "Royal Cowl",
+            "Russian": "Королевский колпак"
+        },
+        "Cowl of Purity":{
+            "code_name": "HEAD_CLOTH_AVALON",
+            "English": "Cowl of Purity",
+            "Russian": "Колпак чистоты"
+        },
+        "Feyscale Hat":{
+            "code_name": "HEAD_CLOTH_FEY",
+            "English": "Feyscale Hat",
+            "Russian": "Шляпа из сказочной чешуи"
+        }
+    },
+    "Cloth armor":{
+        "Scholar Robe":{
+            "code_name": "ARMOR_CLOTH_SET1",
+            "English": "Scholar Robe",
+            "Russian": "Мантия ученого"
+        },
+        "Cleric Robe":{
+            "code_name": "ARMOR_CLOTH_SET2",
+            "English": "Cleric Robe",
+            "Russian": "Мантия клирика"
+        },
+        "Mage Robe":{
+            "code_name": "ARMOR_CLOTH_SET3",
+            "English": "Mage Robe",
+            "Russian": "Мантия чародея"
+        },
+        "Druid Robe":{
+            "code_name": "ARMOR_CLOTH_KEEPER",
+            "English": "Druid Robe",
+            "Russian": "Мантия друида"
+        },
+        "Fiend Robe":{
+            "code_name": "ARMOR_CLOTH_HELL",
+            "English": "Fiend Robe",
+            "Russian": "Дьявольская мантия"
+        },
+        "Cultist Robe":{
+            "code_name": "ARMOR_CLOTH_MORGANA",
+            "English": "Cultist Robe",
+            "Russian": "Мантия культиста"
+        },
+        "Royal Robe":{
+            "code_name": "ARMOR_CLOTH_ROYAL",
+            "English": "Royal Robe",
+            "Russian": "Королевская мантия"
+        },
+        "Robe of Purity":{
+            "code_name": "ARMOR_CLOTH_AVALON",
+            "English": "Robe of Purity",
+            "Russian": "Мантия чистоты"
+        },
+        "Feyscale Robe":{
+            "code_name": "ARMOR_CLOTH_FEY",
+            "English": "Feyscale Robe",
+            "Russian": "Мантия из сказочной чешуи"
+        }
+    },
+    "Cloth shoes":{
+        "Scholar Sandals":{
+            "code_name": "SHOES_CLOTH_SET1",
+            "English": "Scholar Sandals",
+            "Russian": "Сандалии ученого"
+        },
+        "Cleric Sandals":{
+            "code_name": "SHOES_CLOTH_SET2",
+            "English": "Cleric Sandals",
+            "Russian": "Сандалии клирика"
+        },
+        "Mage Sandals":{
+            "code_name": "SHOES_CLOTH_SET3",
+            "English": "Mage Sandals",
+            "Russian": "Сандалии чародея"
+        },
+        "Druid Sandals":{
+            "code_name": "SHOES_CLOTH_KEEPER",
+            "English": "Druid Sandals",
+            "Russian": "Сандалии друида"
+        },
+        "Fiend Sandals":{
+            "code_name": "SHOES_CLOTH_HELL",
+            "English": "Fiend Sandals",
+            "Russian": "Дьявольские сандалии"
+        },
+        "Cultist Sandals":{
+            "code_name": "SHOES_CLOTH_MORGANA",
+            "English": "Cultist Sandals",
+            "Russian": "Сандалии культа"
+        },
+        "Royal Sandals":{
+            "code_name": "SHOES_CLOTH_ROYAL",
+            "English": "Royal Sandals",
+            "Russian": "Сандалии короля"
+        },
+        "Sandals of Purity":{
+            "code_name": "SHOES_CLOTH_AVALON",
+            "English": "Sandals of Purity",
+            "Russian": "Сандалии чистоты"
+        },
+        "Feyscale Sandals":{
+            "code_name": "SHOES_CLOTH_FEY",
+            "English": "Feyscale Sandals",
+            "Russian": "Сандалии фейского духа"
+        }
+    },
+    "Leather helmet":{
+        "Mercenary Hood":{
+            "code_name": "mercenary_hood",
+            "English": "Mercenary Hood",
+            "Russian": "Капюшон наемника"
+        },
+        "Hunter Hood":{
+            "code_name": "hunter_hood",
+            "English": "Hunter Hood",
+            "Russian": "Капюшон охотника"
+        },
+        "Assassin Hood":{
+            "code_name": "assassin_hood",
+            "English": "Assassin Hood",
+            "Russian": "Капюшон убийцы"
+        },
+        "Stalker Hood":{
+            "code_name": "stalker_hood",
+            "English": "Stalker Hood",
+            "Russian": "Капюшон лазутчика"
+        },
+        "Hellion Hood":{
+            "code_name": "hellion_hood",
+            "English": "Hellion Hood",
+            "Russian": "Адский капюшон"
+        },
+        "Specter Hood":{
+            "code_name": "specter_hood",
+            "English": "Specter Hood",
+            "Russian": "Капюшон призрака"
+        },
+        "Royal Hood":{
+            "code_name": "royal_hood",
+            "English": "Royal Hood",
+            "Russian": "Королевский капюшон"
+        },
+        "Hood of Tenacity":{
+            "code_name": "hood_of_tenacity",
+            "English": "Hood of Tenacity",
+            "Russian": "Капюшон упорства"
+        },
+        "Mistwalker Hood":{
+            "code_name": "mistwalker_hood",
+            "English": "Mistwalker Hood",
+            "Russian": "Капюшон туманного охотника"
+        }
+    },
+    "Leather armor":{
+        "Mercenary Jacket":{
+            "code_name": "mercenary_jacket",
+            "English": "Mercenary Jacket",
+            "Russian": "Куртка наемника"
+        },
+        "Hunter Jacket":{
+            "code_name": "hunter_jacket",
+            "English": "Hunter Jacket",
+            "Russian": "Куртка охотника"
+        },
+        "Assassin Jacket":{
+            "code_name": "assassin_jacket",
+            "English": "Assassin Jacket",
+            "Russian": "Куртка убийцы"
+        },
+        "Stalker Jacket":{
+            "code_name": "stalker_jacket",
+            "English": "Stalker Jacket",
+            "Russian": "Куртка лазутчика"
+        },
+        "Hellion Jacket":{
+            "code_name": "hellion_jacket",
+            "English": "Hellion Jacket",
+            "Russian": "Адская куртка"
+        },
+        "Specter Jacekt":{
+            "code_name": "specter_jacket",
+            "English": "Specter",
+            "Russian":"Куртка призрака"
+        },
+        "Royal Jacket":{
+            "code_name": "specter_jacket",
+            "English": "Specter",
+            "Russian":"Королевская куртка"
+        },
+        "Jacket of Tenacity":{
+            "code_name": "specter_jacket",
+            "English": "Specter",
+            "Russian":"Куртка упорства"
+        },
+        "Mistwalker Jacket":{
+            "code_name": "specter_jacket",
+            "English": "Specter",
+            "Russian":"Куртка туманного охотника"
+        }
+    },
+    "Leather shoes":{
+        "Mercenary Shoes":{
+            "code_name": "mercenary_shoes",
+            "English": "Mercenary Shoes",
+            "Russian": "Ботинки наемника"
+        },
+        "Hunter Shoes":{
+            "code_name": "hunter_shoes",
+            "English": "Hunter Shoes",
+            "Russian": "Ботинки охотника"
+        },
+        "Assassin Shoes":{
+            "code_name": "assassin_shoes",
+            "English": "Assassin Shoes",
+            "Russian": "Ботинки убийцы"
+        },
+        "Stalker Shoes":{
+            "code_name": "stalker_shoes",
+            "English": "Stalker Shoes",
+            "Russian": "Ботинки лазутчика"
+        },
+        "Hellion Shoes":{
+            "code_name": "hellion_shoes",
+            "English": "Hellion Shoes",
+            "Russian": "Адские ботинки"
+            },
+        "Specter Shoes":{
+            "code_name": "specter_shoes",
+            "English": "Specter",
+            "Russian":"Ботинки призрака"
+        },
+        "Royal Shoes":{
+            "code_name": "royal_shoes",
+            "English": "Royal Shoes",
+            "Russian": "Королевские ботинки"
+        },
+        "Shoes of Tenacity":{
+            "code_name": "shoes_of_tenacity",
+            "English": "Shoes of Tenacity",
+            "Russian": "Ботинки упорства"
+        },
+        "Mistwalker Shoes":{
+            "code_name": "mistwalker_shoes",
+            "English": "Mistwalker Shoes",
+            "Russian": "Ботинки туманного охотника"
+        }
+    },
+    "Plate helmet":{
+        "Soldier Helmet":{
+            "code_name": "soldier_helmet",
+            "English": "Soldier Helmet",
+            "Russian": "Шлем солдата"
+        },
+        "Knight Helmet":{
+            "code_name": "knight_helmet",
+            "English": "Knight Helmet",
+            "Russian": "Шлем рыцаря"
+        },
+        "Guardian Helmet":{
+            "code_name": "guardian_helmet",
+            "English": "Guardian Helmet",
+            "Russian": "Шлем хранителя"
+        },
+        "Graveguard Helmet":{
+            "code_name": "graveguard_helmet",
+            "English": "Graveguard Helmet",
+            "Russian": "Могильный шлем"
+        },
+        "Demon Helmet":{
+            "code_name": "demon_helmet",
+            "English": "Demon Helmet",
+            "Russian": "Демонический шлем"
+        },
+        "Judicator Helmet":{
+            "code_name": "judicator_helmet",
+            "English": "Judicator Helmet",
+            "Russian": "Шлем вершителя"
+        },
+        "Royal Helmet":{
+            "code_name": "royal_helmet",
+            "English": "Royal Helmet",
+            "Russian": "Королевский шлем"
+        },
+        "Helmet of Valor":{
+            "code_name": "helmet_of_valor",
+            "English": "Helmet of Valor",
+            "Russian": "Шлем доблести"
+        },
+        "Duskweaver Helmet":{
+            "code_name": "duskweaver_helmet",
+            "English": "Duskweaver Helmet",
+            "Russian": "Шлем сумеречного ткача"
+        }
+    },
+    "Plate armor":{
+        "Soldier Armor":{
+            "code_name": "soldier_armor",
+            "English": "Soldier Armor",
+            "Russian": "Броня солдата"
+        },
+        "Knight Armor":{
+            "code_name": "knight_armor",
+            "English": "Knight Armor",
+            "Russian": "Броня рыцаря"
+        },
+        "Guardian Armor":{
+            "code_name": "guardian_armor",
+            "English": "Guardian Armor",
+            "Russian": "Броня хранителя"
+        },
+        "Graveguard Armor":{
+            "code_name": "graveguard_armor",
+            "English": "Graveguard Armor",
+            "Russian": "Могильная броня"
+        },
+        "Demon Armor":{
+            "code_name": "demon_armor",
+            "English": "Demon Armor",
+            "Russian": "Демоническая броня"
+        },
+        "Judicator Armor":{
+            "code_name": "judicator_armor",
+            "English": "Judicator Armor",
+            "Russian": "Броня вершителя"
+        },
+        "Royal Armor":{
+            "code_name": "royal_armor",
+            "English": "Royal Armor",
+            "Russian": "Королевская броня"
+        },
+        "Armor of Valor":{
+            "code_name": "armor_of_valor",
+            "English": "Armor of Valor",
+            "Russian": "Броня доблести"
+        },
+        "Duskweaver Armor":{
+            "code_name": "duskweaver_armor",
+            "English": "Duskweaver Armor",
+            "Russian": "Броня сумеречного ткача"
+        }
+    },
+    "Plate shoes":{
+        "Soldier Boots":{
+            "code_name": "soldier_boots",
+            "English": "Soldier Boots",
+            "Russian": "Сапоги солдата"
+        },
+        "Knight Boots":{
+            "code_name": "knight_boots",
+            "English": "Knight Boots",
+            "Russian": "Сапоги рыцаря"
+        },
+        "Guardian Boots":{
+            "code_name": "guardian_boots",
+            "English": "Guardian Boots",
+            "Russian": "Сапоги хранителя"
+        },
+        "Graveguard Boots":{
+            "code_name": "graveguard_boots",
+            "English": "Graveguard Boots",
+            "Russian": "Могильные сапоги"
+        },
+        "Demon Boots":{
+            "code_name": "demon_boots",
+            "English": "Demon Boots",
+            "Russian": "Демонические сапоги"
+        },
+        "Judicator Boots":{
+            "code_name": "judicator_boots",
+            "English": "Judicator Boots",
+            "Russian": "Сапоги вершителя"
+        },
+        "Royal Boots":{
+            "code_name": "royal_boots",
+            "English": "Royal Boots",
+            "Russian": "Королевские сапоги"
+        },
+        "Boots of Valor":{
+            "code_name": "boots_of_valor",
+            "English": "Boots of Valor",
+            "Russian": "Сапоги доблести"
+        },
+        "Duskweaver Boots":{
+            "code_name": "duskweaver_boots",
+            "English": "Duskweaver Boots",
+            "Russian": "Сапоги сумеречного ткача"
+        }
+    },
+
+
+    "Bags":{
+        "Bag": {
+            "code_name": "bag",
+            "English": "Bag",
+            "Russian": "Сумка"
+        },
+        "Bag insight":{
+            "code_name": "bag_insight",
+            "English": "Bag of Insight",
+            "Russian": "Кошель интуиции"
+        }
+    },
+
+
+    "Cape":{
+        "Cape":{
+            "code_name": "cape",
+            "English": "Cape",
+            "Russian": "Плащ"
+        },
+        "Bridgewatch Cape":{
+            "code_name": "CAPEITEM_FW_BRIDGEWATCH",
+            "English": "Bridgewatch Cape",
+            "Russian": "Плащ Bridgewatch"
+        },
+        "Fort Sterling Cape":{
+            "code_name": "CAPEITEM_FW_FORTSTERLING",
+            "English": "Fort Sterling Cape",
+            "Russian": "Плащ Fort Sterling"
+        },
+        "Lymhurst Cape":{
+            "code_name": "CAPEITEM_FW_LYMHURST",
+            "English": "Lymhurst Cape",
+            "Russian": "Плащ Lymhurst"
+        },
+        "Martlock Cape":{
+            "code_name": "CAPEITEM_FW_MARTLOCK",
+            "English": "Martlock Cape",
+            "Russian": "Плащ Martlock"
+        },
+        "Thetford Cape":{
+            "code_name": "CAPEITEM_FW_THETFORD",
+            "English": "Thetford Cape",
+            "Russian": "Плащ Thetford"
+        },
+        "Caerleon Cape":{
+            "code_name": "CAPEITEM_FW_CAERLEON",
+            "English": "Caerleon Cape",
+            "Russian": "Плащ Caerleon"
+        },
+        "Brecilien Cape":{
+            "code_name": "CAPEITEM_FW_BRECILIEN",
+            "English": "Brecilien Cape",
+            "Russian": "Плащ Brecilien"
+        },
+        "Avalonian Cape":{
+            "code_name": "CAPEITEM_AVALON",
+            "English": "Avalonian Cape",
+            "Russian": "Плащ Авалонский"
+        },
+        "Heretic Cape":{
+            "code_name": "CAPEITEM_HERETIC",
+            "English": "Heretic Cape",
+            "Russian": "Плащ Еретиков"
+        },
+        "Undead Cape":{
+            "code_name": "CAPEITEM_UNDEAD",
+            "English": "Undead Cape",
+            "Russian": "Плащ Нежити"
+        },
+        "Keeper Cape":{
+            "code_name": "CAPEITEM_KEEPER",
+            "English": "Keeper Cape",
+            "Russian": "Плащ Хранителей"
+        },
+        "Morgana Cape":{
+            "code_name": "CAPEITEM_MORGANA",
+            "English": "Morgana Cape",
+            "Russian": "Плащ Морганы"
+        },
+        "Demon Cape":{
+            "code_name": "CAPEITEM_DEMON",
+            "English": "Demon Cape",
+            "Russian": "Плащ Демона"
+        }
+    },
+
+
+    "Off-Hand":{
+        "Shield":{
+            "code_name": "OFF_SHIELD",
+            "English": "Shield",
+            "Russian": "Щит"
+        },
+        "Sarcophagus":{
+            "code_name": "OFF_TOWERSHIELD_UNDEAD",
+            "English": "Sarcophagus",
+            "Russian": "Саркофаг"
+        },
+        "Caitiff Shield":{
+            "code_name": "OFF_SHIELD_HELL",
+            "English": "Caitiff Shield",
+            "Russian": "Щит негодяя"
+        },
+        "Facebreaker":{
+            "code_name": "OFF_SPIKEDSHIELD_MORGANA",
+            "English": "Facebreaker",
+            "Russian": "Лицелом"
+        },
+        "Astral Aegis":{
+            "code_name": "OFF_SHIELD_AVALON",
+            "English": "Astral Aegis",
+            "Russian": "Эгида звёзд"
+        },
+        "Tome of Spells":{
+            "code_name": "OFF_BOOK",
+            "English": "Tome of Spells",
+            "Russian": "Книга заклинаний"
+        },
+        "Eye of Secrets":{
+            "code_name": "OFF_ORB_MORGANA",
+            "English": "Eye of Secrets",
+            "Russian": "Око тайны"
+        },
+        "Muisak":{
+            "code_name": "OFF_DEMONSKULL_HELL",
+            "English": "Muisak",
+            "Russian": "Череп-трофей"
+        },
+        "Taproot":{
+            "code_name": "OFF_TOTEM_KEEPER",
+            "English": "Taproot",
+            "Russian": "Корень природы"
+        },
+        "Celestial Censer":{
+            "code_name": "OFF_CENSER_AVALON",
+            "English": "Celestial Censer",
+            "Russian": "Небесное кадило"
+        },
+        "Torch":{
+            "code_name": "OFF_TORCH",
+            "English": "Torch",
+            "Russian": "Факел"
+        },
+        "Mistcaller":{
+            "code_name": "OFF_HORN_KEEPER",
+            "English": "Mistcaller",
+            "Russian": "Туманный зов"
+        },
+        "Sacred Scepter":{
+            "code_name": "OFF_TALISMAN_AVALON",
+            "English": "Sacred Scepter",
+            "Russian": "Священный скипетр"
+        },
+        "Cryptcandle":{
+            "code_name": "OFF_LAMP_UNDEAD",
+            "English": "Crypt Candle",
+            "Russian": "Могильная свеча"
+        },
+        "Leering Cane":{
+            "code_name": "OFF_JESTERCANE_HELL",
+            "English": "Leering Cane",
+            "Russian": "Зловещая трость"
+        }
+    }
+}

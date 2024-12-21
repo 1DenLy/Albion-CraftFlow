@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Запуск текущего файла как модуля",
+            "type": "debugpy", 
+            "request": "launch",
+            "module": "${relativeFile}",  // Использует текущий файл как модуль
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}
