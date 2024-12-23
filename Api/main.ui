@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
-    <height>800</height>
+    <width>1307</width>
+    <height>837</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,9 +21,9 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>-5</y>
-      <width>1200</width>
-      <height>800</height>
+      <y>0</y>
+      <width>1191</width>
+      <height>771</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -32,21 +32,21 @@
       <height>400</height>
      </size>
     </property>
-    <layout class="QVBoxLayout" name="windowadwdwadawdawdwa">
+    <layout class="QVBoxLayout" name="window_Layout">
      <property name="spacing">
       <number>0</number>
      </property>
      <property name="leftMargin">
-      <number>0</number>
+      <number>2</number>
      </property>
      <property name="topMargin">
       <number>0</number>
      </property>
      <property name="rightMargin">
-      <number>0</number>
+      <number>2</number>
      </property>
      <property name="bottomMargin">
-      <number>0</number>
+      <number>2</number>
      </property>
      <item>
       <widget class="QFrame" name="Up_menu">
@@ -67,17 +67,17 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="label_icon">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
           <property name="minimumSize">
            <size>
-            <width>30</width>
-            <height>30</height>
+            <width>20</width>
+            <height>20</height>
            </size>
           </property>
           <property name="maximumSize">
@@ -119,7 +119,7 @@
             <number>0</number>
            </property>
            <item>
-            <widget class="QPushButton" name="pushButton">
+            <widget class="QPushButton" name="pushButton_menubar_1">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
                <horstretch>0</horstretch>
@@ -149,7 +149,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_2">
+            <widget class="QPushButton" name="pushButton_menubar_2">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
                <horstretch>0</horstretch>
@@ -179,7 +179,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_3">
+            <widget class="QPushButton" name="pushButton_menubar_3">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
                <horstretch>0</horstretch>
@@ -209,7 +209,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_5">
+            <widget class="QPushButton" name="pushButton_menubar_4">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
                <horstretch>0</horstretch>
@@ -239,7 +239,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_4">
+            <widget class="QPushButton" name="pushButton_menubar_5">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
                <horstretch>0</horstretch>
@@ -269,7 +269,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_9">
+            <widget class="QPushButton" name="pushButton_menubar_6">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
                <horstretch>0</horstretch>
@@ -302,7 +302,7 @@
             </widget>
            </item>
            <item>
-            <spacer name="horizontalSpacer">
+            <spacer name="horSp_menubar">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
@@ -322,34 +322,34 @@
         </item>
         <item>
          <widget class="QLineEdit" name="lineEdit">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
           <property name="minimumSize">
            <size>
             <width>150</width>
-            <height>0</height>
+            <height>10</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
             <width>350</width>
-            <height>16777215</height>
+            <height>20</height>
            </size>
           </property>
           <property name="inputMask">
-           <string>Items</string>
+           <string/>
+          </property>
+          <property name="text">
+           <string/>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
           </property>
+          <property name="placeholderText">
+           <string/>
+          </property>
          </widget>
         </item>
         <item>
-         <spacer name="horizontalSpacer_2">
+         <spacer name="horSp_menubar_2">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -381,7 +381,7 @@
           <property name="maximumSize">
            <size>
             <width>120</width>
-            <height>16777215</height>
+            <height>25</height>
            </size>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -421,7 +421,7 @@
               </size>
              </property>
              <property name="text">
-              <string>_</string>
+              <string/>
              </property>
             </widget>
            </item>
@@ -440,7 +440,7 @@
               </size>
              </property>
              <property name="text">
-              <string>H</string>
+              <string/>
              </property>
             </widget>
            </item>
@@ -459,7 +459,7 @@
               </size>
              </property>
              <property name="text">
-              <string>X</string>
+              <string/>
              </property>
             </widget>
            </item>
@@ -479,7 +479,7 @@
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <property name="spacing">
-         <number>0</number>
+         <number>2</number>
         </property>
         <property name="leftMargin">
          <number>0</number>
@@ -494,7 +494,7 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="QFrame" name="verticalFrame">
+         <widget class="QFrame" name="left_button_zone">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -506,7 +506,7 @@
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
            <property name="spacing">
-            <number>0</number>
+            <number>5</number>
            </property>
            <property name="leftMargin">
             <number>0</number>
@@ -521,7 +521,7 @@
             <number>0</number>
            </property>
            <item>
-            <widget class="QLabel" name="label_2">
+            <widget class="QPushButton" name="pushButton_file">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -536,25 +536,17 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>40</width>
-               <height>40</height>
+               <width>45</width>
+               <height>45</height>
               </size>
              </property>
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
              <property name="text">
-              <string>File</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <string>F</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_3">
+            <widget class="QPushButton" name="pushButton_file_2">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -569,25 +561,17 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>40</width>
-               <height>40</height>
+               <width>45</width>
+               <height>45</height>
               </size>
              </property>
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
              <property name="text">
-              <string>Scearch</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <string>S</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_4">
+            <widget class="QPushButton" name="pushButton_file_3">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -602,25 +586,17 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>40</width>
-               <height>40</height>
+               <width>45</width>
+               <height>45</height>
               </size>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
              </property>
              <property name="text">
               <string>AI</string>
              </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_5">
+            <widget class="QPushButton" name="pushButton_file_4">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -635,20 +611,12 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>40</width>
-               <height>40</height>
+               <width>45</width>
+               <height>45</height>
               </size>
              </property>
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
              <property name="text">
-              <string>Grafik</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <string>G</string>
              </property>
             </widget>
            </item>
@@ -669,7 +637,7 @@
             </spacer>
            </item>
            <item>
-            <widget class="QLabel" name="label_7">
+            <widget class="QPushButton" name="pushButton_settings">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -684,20 +652,12 @@
              </property>
              <property name="maximumSize">
               <size>
-               <width>40</width>
-               <height>40</height>
+               <width>45</width>
+               <height>45</height>
               </size>
              </property>
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
              <property name="text">
-              <string>Sett</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <string>S</string>
              </property>
             </widget>
            </item>
@@ -705,7 +665,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QFrame" name="verticalFrame">
+         <widget class="QFrame" name="left_button_menu">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -729,7 +689,7 @@
             <number>0</number>
            </property>
            <item>
-            <widget class="QLabel" name="label_6">
+            <widget class="QLabel" name="label_name_button_function">
              <property name="font">
               <font>
                <pointsize>12</pointsize>
@@ -769,7 +729,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QTabWidget" name="tabWidget">
+         <widget class="QTabWidget" name="tab_zone">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -812,9 +772,15 @@
           <property name="elideMode">
            <enum>Qt::ElideLeft</enum>
           </property>
+          <property name="tabsClosable">
+           <bool>true</bool>
+          </property>
+          <property name="movable">
+           <bool>true</bool>
+          </property>
           <widget class="QWidget" name="tab">
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(85, 159, 153);</string>
+            <string notr="true"/>
            </property>
            <attribute name="title">
             <string>Tab 1</string>
@@ -822,7 +788,7 @@
           </widget>
           <widget class="QWidget" name="tab_2">
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(81, 115, 44);</string>
+            <string notr="true"/>
            </property>
            <attribute name="title">
             <string>Tab 2</string>
