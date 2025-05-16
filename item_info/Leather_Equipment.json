@@ -1,0 +1,235 @@
+{
+  "Equipment": {
+    "Head": {
+      "Hunter Hood": {
+        "code_name": "HEAD_LEATHER_SET1",
+        "English": "Hunter Hood",
+        "Russian": "Капюшон охотника",
+        "Material": {
+          "Leather": 8
+        }
+      },
+      "Assassin Hood": {
+        "code_name": "HEAD_LEATHER_SET2",
+        "English": "Assassin Hood",
+        "Russian": "Капюшон ассасина",
+        "Material": {
+          "Leather": 8
+        }
+      },
+      "Mercenary Hood": {
+        "code_name": "HEAD_LEATHER_SET3",
+        "English": "Mercenary Hood",
+        "Russian": "Капюшон наёмника",
+        "Material": {
+          "Leather": 8
+        }
+      },
+      "Royal Hood": {
+        "code_name": "HEAD_LEATHER_ROYAL",
+        "English": "Royal Hood",
+        "Russian": "Королевский капюшон",
+        "Material": {
+          "Leather": 8,
+          "Royal Sigil": 1
+        }
+      },
+      "Stalker Hood": {
+        "code_name": "HEAD_LEATHER_UNDEAD",
+        "English": "Stalker Hood",
+        "Russian": "Капюшон преследователя",
+        "Material": {
+          "Leather": 8,
+          "Artifact": "HEAD_LEATHER_UNDEAD"
+        }
+      },
+      "Hellion Hood": {
+        "code_name": "HEAD_LEATHER_HELL",
+        "English": "Hellion Hood",
+        "Russian": "Капюшон хелиона",
+        "Material": {
+          "Leather": 8,
+          "Artifact": "HEAD_LEATHER_HELL"
+        }
+      },
+      "Specter Hood": {
+        "code_name": "HEAD_LEATHER_MORGANA",
+        "English": "Specter Hood",
+        "Russian": "Капюшон спектра",
+        "Material": {
+          "Leather": 8,
+          "Artifact": "HEAD_LEATHER_MORGANA"
+        }
+      },
+      "Mistwalker Hood": {
+        "code_name": "HEAD_LEATHER_FEY",
+        "English": "Mistwalker Hood",
+        "Russian": "Капюшон туманного странника",
+        "Material": {
+          "Leather": 8,
+          "Artifact": "HEAD_LEATHER_FEY"
+        }
+      }
+    },
+    "Armor": {
+      "Hunter Jacket": {
+        "code_name": "ARMOR_LEATHER_SET1",
+        "English": "Hunter Jacket",
+        "Russian": "Куртка охотника",
+        "Material": {
+          "Leather": 16
+        }
+      },
+      "Assassin Jacket": {
+        "code_name": "ARMOR_LEATHER_SET2",
+        "English": "Assassin Jacket",
+        "Russian": "Куртка ассасина",
+        "Material": {
+          "Leather": 16
+        }
+      },
+      "Mercenary Jacket": {
+        "code_name": "ARMOR_LEATHER_SET3",
+        "English": "Mercenary Jacket",
+        "Russian": "Куртка наёмника",
+        "Material": {
+          "Leather": 16
+        }
+      },
+      "Royal Jacket": {
+        "code_name": "ARMOR_LEATHER_ROYAL",
+        "English": "Royal Jacket",
+        "Russian": "Королевская куртка",
+        "Material": {
+          "Leather": 16,
+          "Royal Sigil": 1
+        }
+      },
+      "Stalker Jacket": {
+        "code_name": "ARMOR_LEATHER_UNDEAD",
+        "English": "Stalker Jacket",
+        "Russian": "Куртка преследователя",
+        "Material": {
+          "Leather": 16,
+          "Artifact": "ARMOR_LEATHER_UNDEAD"
+        }
+      },
+      "Hellion Jacket": {
+        "code_name": "ARMOR_LEATHER_HELL",
+        "English": "Hellion Jacket",
+        "Russian": "Куртка хелиона",
+        "Material": {
+          "Leather": 16,
+          "Artifact": "ARMOR_LEATHER_HELL"
+        }
+      },
+      "Specter Jacket": {
+        "code_name": "ARMOR_LEATHER_MORGANA",
+        "English": "Specter Jacket",
+        "Russian": "Куртка спектра",
+        "Material": {
+          "Leather": 16,
+          "Artifact": "ARMOR_LEATHER_MORGANA"
+        }
+      },
+      "Mistwalker Jacket": {
+        "code_name": "ARMOR_LEATHER_FEY",
+        "English": "Mistwalker Jacket",
+        "Russian": "Куртка туманного странника",
+        "Material": {
+          "Leather": 16,
+          "Artifact": "ARMOR_LEATHER_FEY"
+        }
+      },
+      "Jacket of Tenacity": {
+        "code_name": "ARMOR_LEATHER_KEEPER",
+        "English": "Jacket of Tenacity",
+        "Russian": "Куртка стойкости",
+        "Material": {
+          "Leather": 16,
+          "Artifact": "ARMOR_LEATHER_KEEPER"
+        }
+      }
+    },
+    "Shoes": {
+      "Hunter Shoes": {
+        "code_name": "SHOES_LEATHER_SET1",
+        "English": "Hunter Shoes",
+        "Russian": "Ботинки охотника",
+        "Material": {
+          "Leather": 8
+        }
+      },
+      "Assassin Shoes": {
+        "code_name": "SHOES_LEATHER_SET2",
+        "English": "Assassin Shoes",
+        "Russian": "Ботинки ассасина",
+        "Material": {
+          "Leather": 8
+        }
+      },
+      "Mercenary Shoes": {
+        "code_name": "SHOES_LEATHER_SET3",
+        "English": "Mercenary Shoes",
+        "Russian": "Ботинки наёмника",
+        "Material": {
+          "Leather": 8
+        }
+      },
+      "Royal Shoes": {
+        "code_name": "SHOES_LEATHER_ROYAL",
+        "English": "Royal Shoes",
+        "Russian": "Королевские ботинки",
+        "Material": {
+          "Leather": 8,
+          "Royal Sigil": 1
+        }
+      },
+      "Stalker Shoes": {
+        "code_name": "SHOES_LEATHER_UNDEAD",
+        "English": "Stalker Shoes",
+        "Russian": "Ботинки преследователя",
+        "Material": {
+          "Leather": 8,
+          "Artifact": "SHOES_LEATHER_UNDEAD"
+        }
+      },
+      "Hellion Shoes": {
+        "code_name": "SHOES_LEATHER_HELL",
+        "English": "Hellion Shoes",
+        "Russian": "Ботинки хелиона",
+        "Material": {
+          "Leather": 8,
+          "Artifact": "SHOES_LEATHER_HELL"
+        }
+      },
+      "Specter Shoes": {
+        "code_name": "SHOES_LEATHER_MORGANA",
+        "English": "Specter Shoes",
+        "Russian": "Ботинки спектра",
+        "Material": {
+          "Leather": 8,
+          "Artifact": "SHOES_LEATHER_MORGANA"
+        }
+      },
+      "Mistwalker Shoes": {
+        "code_name": "SHOES_LEATHER_FEY",
+        "English": "Mistwalker Shoes",
+        "Russian": "Ботинки туманного странника",
+        "Material": {
+          "Leather": 8,
+          "Artifact": "SHOES_LEATHER_FEY"
+        }
+      },
+      "Shoes of Tenacity": {
+        "code_name": "SHOES_LEATHER_KEEPER",
+        "English": "Shoes of Tenacity",
+        "Russian": "Ботинки стойкости",
+        "Material": {
+          "Leather": 8,
+          "Artifact": "SHOES_LEATHER_KEEPER"
+        }
+      }
+    }
+  }
+}

@@ -4,10 +4,11 @@ from PyQt5.uic import loadUi
 
 
 from button_logic import ButtonLogic
+from AppManager import AppManager
 
 # Tabs
 from Tabs.Settings.settings_main import Settings_window
-
+from Tabs.Craft.craft_main import Craft_window
 
 
 
@@ -22,6 +23,17 @@ class MyWindow(QMainWindow):
         # --------------------------------
 
 
+        # Инициализация зависимостей
+
+        self.manager = AppManager(app_name="Albion_Data_Manager")
+
+
+
+        # --------------------------------
+
+
+
+
         try:
             self.button_logic = ButtonLogic(self, tab_element = self.tab_zone)
         except Exception as e:
@@ -32,29 +44,34 @@ class MyWindow(QMainWindow):
 
         self.tab_zone.tabCloseRequested.connect(self.close_tab)
         
+        
 
 
     def setup_clicked_connect(self):
         self.pushButton_settings.clicked.connect(lambda: self.button_logic.open_tab(tab= self.tab_settings, tab_name= "Settings"))
+        self.pushButton_file_5.clicked.connect(lambda: self.button_logic.open_tab(tab= self.tab_craft, tab_name= "Craft"))
+
+
+# База окна ----------------------------------------------------
 
     def close_tab(self, index):
         """Закрытие вкладки по индексу"""
         self.tab_zone.removeTab(index)
 
     def tab_load(self):
-        self.tab_settings = Settings_window()
+        """Загрузка вкладок"""
+        self.tab_craft = Craft_window(self)
 
-
+        # Добавьте другие вкладки по аналогии
+        # self.tab_zone.addTab(OtherTab(), "Other Tab")
 
 
     def resizeEvent(self, event):
         super().resizeEvent(event)
         
-        # Получаем новые размеры окна
         new_width = self.width()
         new_height = self.height()
 
-        # Масштабируем центральный виджет пропорционально размеру окна
         self.window.setFixedSize(new_width, new_height)
 
 

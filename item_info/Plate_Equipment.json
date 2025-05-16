@@ -1,0 +1,244 @@
+{
+  "Plate": {
+    "Helmets": {
+      "Soldier Helmet": {
+        "code_name": "HEAD_PLATE_SET1",
+        "English": "Soldier Helmet",
+        "Russian": "Шлем солдата",
+        "Material": {
+          "Metal Bar": 8
+        }
+      },
+      "Knight Helmet": {
+        "code_name": "HEAD_PLATE_SET2",
+        "English": "Knight Helmet",
+        "Russian": "Шлем рыцаря",
+        "Material": {
+          "Metal Bar": 8
+        }
+      },
+      "Guardian Helmet": {
+        "code_name": "HEAD_PLATE_SET3",
+        "English": "Guardian Helmet",
+        "Russian": "Шлем стража",
+        "Material": {
+          "Metal Bar": 8
+        }
+      },
+      "Royal Helmet": {
+        "code_name": "HEAD_PLATE_ROYAL",
+        "English": "Royal Helmet",
+        "Russian": "Королевский шлем",
+        "Material": {
+          "Metal Bar": 8,
+          "Royal Sigil": 1
+        }
+      },
+      "Demon Helmet": {
+        "code_name": "HEAD_PLATE_HELL",
+        "English": "Demon Helmet",
+        "Russian": "Шлем демона",
+        "Material": {
+          "Metal Bar": 8,
+          "Artifact": "HEAD_PLATE_HELL"
+        }
+      },
+      "Graveguard Helmet": {
+        "code_name": "HEAD_PLATE_UNDEAD",
+        "English": "Graveguard Helmet",
+        "Russian": "Шлем стража могил",
+        "Material": {
+          "Metal Bar": 8,
+          "Artifact": "HEAD_PLATE_UNDEAD"
+        }
+      },
+      "Judicator Helmet": {
+        "code_name": "HEAD_PLATE_MORGANA",
+        "English": "Judicator Helmet",
+        "Russian": "Шлем вершителя",
+        "Material": {
+          "Metal Bar": 8,
+          "Artifact": "HEAD_PLATE_MORGANA"
+        }
+      },
+      "Keeper Helmet": {
+        "code_name": "HEAD_PLATE_KEEPER",
+        "English": "Keeper Helmet",
+        "Russian": "Шлем хранителя",
+        "Material": {
+          "Metal Bar": 8,
+          "Artifact": "HEAD_PLATE_KEEPER"
+        }
+      },
+      "Feyscale Helmet": {
+        "code_name": "HEAD_PLATE_FEY",
+        "English": "Feyscale Helmet",
+        "Russian": "Шлем фей",
+        "Material": {
+          "Metal Bar": 8,
+          "Artifact": "HEAD_PLATE_FEY"
+        }
+      }
+    },
+    "Armors": {
+      "Soldier Armor": {
+        "code_name": "ARMOR_PLATE_SET1",
+        "English": "Soldier Armor",
+        "Russian": "Броня солдата",
+        "Material": {
+          "Metal Bar": 16
+        }
+      },
+      "Knight Armor": {
+        "code_name": "ARMOR_PLATE_SET2",
+        "English": "Knight Armor",
+        "Russian": "Броня рыцаря",
+        "Material": {
+          "Metal Bar": 16
+        }
+      },
+      "Guardian Armor": {
+        "code_name": "ARMOR_PLATE_SET3",
+        "English": "Guardian Armor",
+        "Russian": "Броня стража",
+        "Material": {
+          "Metal Bar": 16
+        }
+      },
+      "Royal Armor": {
+        "code_name": "ARMOR_PLATE_ROYAL",
+        "English": "Royal Armor",
+        "Russian": "Королевская броня",
+        "Material": {
+          "Metal Bar": 16,
+          "Royal Sigil": 1
+        }
+      },
+      "Demon Armor": {
+        "code_name": "ARMOR_PLATE_HELL",
+        "English": "Demon Armor",
+        "Russian": "Броня демона",
+        "Material": {
+          "Metal Bar": 16,
+          "Artifact": "ARMOR_PLATE_HELL"
+        }
+      },
+      "Graveguard Armor": {
+        "code_name": "ARMOR_PLATE_UNDEAD",
+        "English": "Graveguard Armor",
+        "Russian": "Броня стража могил",
+        "Material": {
+          "Metal Bar": 16,
+          "Artifact": "ARMOR_PLATE_UNDEAD"
+        }
+      },
+      "Judicator Armor": {
+        "code_name": "ARMOR_PLATE_MORGANA",
+        "English": "Judicator Armor",
+        "Russian": "Броня вершителя",
+        "Material": {
+          "Metal Bar": 16,
+          "Artifact": "ARMOR_PLATE_MORGANA"
+        }
+      },
+      "Keeper Armor": {
+        "code_name": "ARMOR_PLATE_KEEPER",
+        "English": "Keeper Armor",
+        "Russian": "Броня хранителя",
+        "Material": {
+          "Metal Bar": 16,
+          "Artifact": "ARMOR_PLATE_KEEPER"
+        }
+      },
+      "Feyscale Armor": {
+        "code_name": "ARMOR_PLATE_FEY",
+        "English": "Feyscale Armor",
+        "Russian": "Броня фей",
+        "Material": {
+          "Metal Bar": 16,
+          "Artifact": "ARMOR_PLATE_FEY"
+        }
+      }
+    },
+    "Boots": {
+      "Soldier Boots": {
+        "code_name": "SHOES_PLATE_SET1",
+        "English": "Soldier Boots",
+        "Russian": "Сапоги солдата",
+        "Material": {
+          "Metal Bar": 8
+        }
+      },
+      "Knight Boots": {
+        "code_name": "SHOES_PLATE_SET2",
+        "English": "Knight Boots",
+        "Russian": "Сапоги рыцаря",
+        "Material": {
+          "Metal Bar": 8
+        }
+      },
+      "Guardian Boots": {
+        "code_name": "SHOES_PLATE_SET3",
+        "English": "Guardian Boots",
+        "Russian": "Сапоги стража",
+        "Material": {
+          "Metal Bar": 8
+        }
+      },
+      "Royal Boots": {
+        "code_name": "SHOES_PLATE_ROYAL",
+        "English": "Royal Boots",
+        "Russian": "Королевские сапоги",
+        "Material": {
+          "Metal Bar": 8,
+          "Royal Sigil": 1
+        }
+      },
+      "Demon Boots": {
+        "code_name": "SHOES_PLATE_HELL",
+        "English": "Demon Boots",
+        "Russian": "Сапоги демона",
+        "Material": {
+          "Metal Bar": 8,
+          "Artifact": "SHOES_PLATE_HELL"
+        }
+      },
+      "Graveguard Boots": {
+        "code_name": "SHOES_PLATE_UNDEAD",
+        "English": "Graveguard Boots",
+        "Russian": "Сапоги стража могил",
+        "Material": {
+          "Metal Bar": 8,
+          "Artifact": "SHOES_PLATE_UNDEAD"
+        }
+      },
+      "Judicator Boots": {
+        "code_name": "SHOES_PLATE_MORGANA",
+        "English": "Judicator Boots",
+        "Russian": "Сапоги вершителя",
+        "Material": {
+          "Metal Bar": 8,
+          "Artifact": "SHOES_PLATE_MORGANA"
+        }
+      },
+      "Keeper Boots": {
+        "code_name": "SHOES_PLATE_KEEPER",
+        "English": "Keeper Boots",
+        "Russian": "Сапоги хранителя",
+        "Material": {
+          "Metal Bar": 8,
+          "Artifact": "SHOES_PLATE_KEEPER"
+        }
+      },
+      "Feyscale Boots": {
+        "code_name": "SHOES_PLATE_FEY",
+        "English": "Feyscale Boots",
+        "Russian": "Сапоги фей",
+        "Material": {
+          "Metal Bar": 8,
+          "Artifact": "SHOES_PLATE_FEY"
+        }
+      }
+    }
+  }
+}

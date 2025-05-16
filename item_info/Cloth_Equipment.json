@@ -1,0 +1,238 @@
+{
+  "Cloth Equipment": {
+    "Scholar Cowl": {
+      "code_name": "HEAD_CLOTH_SET1",
+      "English": "Scholar Cowl",
+      "Russian": "Капюшон ученого",
+      "Material": {
+        "Cloth": 8
+      }
+    },
+    "Scholar Robe": {
+      "code_name": "ARMOR_CLOTH_SET1",
+      "English": "Scholar Robe",
+      "Russian": "Мантия ученого",
+      "Material": {
+        "Cloth": 16
+      }
+    },
+    "Scholar Sandals": {
+      "code_name": "SHOES_CLOTH_SET1",
+      "English": "Scholar Sandals",
+      "Russian": "Сандалии ученого",
+      "Material": {
+        "Cloth": 8
+      }
+    },
+    "Cleric Cowl": {
+      "code_name": "HEAD_CLOTH_SET2",
+      "English": "Cleric Cowl",
+      "Russian": "Капюшон клирика",
+      "Material": {
+        "Cloth": 8
+      }
+    },
+    "Cleric Robe": {
+      "code_name": "ARMOR_CLOTH_SET2",
+      "English": "Cleric Robe",
+      "Russian": "Мантия клирика",
+      "Material": {
+        "Cloth": 16
+      }
+    },
+    "Cleric Sandals": {
+      "code_name": "SHOES_CLOTH_SET2",
+      "English": "Cleric Sandals",
+      "Russian": "Сандалии клирика",
+      "Material": {
+        "Cloth": 8
+      }
+    },
+    "Mage Cowl": {
+      "code_name": "HEAD_CLOTH_SET3",
+      "English": "Mage Cowl",
+      "Russian": "Капюшон мага",
+      "Material": {
+        "Cloth": 8
+      }
+    },
+    "Mage Robe": {
+      "code_name": "ARMOR_CLOTH_SET3",
+      "English": "Mage Robe",
+      "Russian": "Мантия мага",
+      "Material": {
+        "Cloth": 16
+      }
+    },
+    "Mage Sandals": {
+      "code_name": "SHOES_CLOTH_SET3",
+      "English": "Mage Sandals",
+      "Russian": "Сандалии мага",
+      "Material": {
+        "Cloth": 8
+      }
+    },
+    "Royal Cowl": {
+      "code_name": "HEAD_CLOTH_ROYAL",
+      "English": "Royal Cowl",
+      "Russian": "Королевский капюшон",
+      "Material": {
+        "Cloth": 8,
+        "Royal Sigil": 1
+      }
+    },
+    "Royal Robe": {
+      "code_name": "ARMOR_CLOTH_ROYAL",
+      "English": "Royal Robe",
+      "Russian": "Королевская мантия",
+      "Material": {
+        "Cloth": 16,
+        "Royal Sigil": 1
+      }
+    },
+    "Royal Sandals": {
+      "code_name": "SHOES_CLOTH_ROYAL",
+      "English": "Royal Sandals",
+      "Russian": "Королевские сандалии",
+      "Material": {
+        "Cloth": 8,
+        "Royal Sigil": 1
+      }
+    },
+    "Cultist Cowl": {
+      "code_name": "HEAD_CLOTH_HELL",
+      "English": "Cultist Cowl",
+      "Russian": "Капюшон культиста",
+      "Material": {
+        "Cloth": 8,
+        "Artifact": "HEAD_CLOTH_HELL"
+      }
+    },
+    "Cultist Robe": {
+      "code_name": "ARMOR_CLOTH_HELL",
+      "English": "Cultist Robe",
+      "Russian": "Мантия культиста",
+      "Material": {
+        "Cloth": 16,
+        "Artifact": "ARMOR_CLOTH_HELL"
+      }
+    },
+    "Cultist Sandals": {
+      "code_name": "SHOES_CLOTH_HELL",
+      "English": "Cultist Sandals",
+      "Russian": "Сандалии культиста",
+      "Material": {
+        "Cloth": 8,
+        "Artifact": "SHOES_CLOTH_HELL"
+      }
+    },
+    "Fiend Cowl": {
+      "code_name": "HEAD_CLOTH_MORGANA",
+      "English": "Fiend Cowl",
+      "Russian": "Капюшон демона",
+      "Material": {
+        "Cloth": 8,
+        "Artifact": "HEAD_CLOTH_MORGANA"
+      }
+    },
+    "Fiend Robe": {
+      "code_name": "ARMOR_CLOTH_MORGANA",
+      "English": "Fiend Robe",
+      "Russian": "Мантия демона",
+      "Material": {
+        "Cloth": 16,
+        "Artifact": "ARMOR_CLOTH_MORGANA"
+      }
+    },
+    "Fiend Sandals": {
+      "code_name": "SHOES_CLOTH_MORGANA",
+      "English": "Fiend Sandals",
+      "Russian": "Сандалии демона",
+      "Material": {
+        "Cloth": 8,
+        "Artifact": "SHOES_CLOTH_MORGANA"
+      }
+    },
+    "Druid Cowl": {
+      "code_name": "HEAD_CLOTH_KEEPER",
+      "English": "Druid Cowl",
+      "Russian": "Капюшон друида",
+      "Material": {
+        "Cloth": 8,
+        "Artifact": "HEAD_CLOTH_KEEPER"
+      }
+    },
+    "Druid Robe": {
+      "code_name": "ARMOR_CLOTH_KEEPER",
+      "English": "Druid Robe",
+      "Russian": "Мантия друида",
+      "Material": {
+        "Cloth": 16,
+        "Artifact": "ARMOR_CLOTH_KEEPER"
+      }
+    },
+    "Druid Sandals": {
+      "code_name": "SHOES_CLOTH_KEEPER",
+      "English": "Druid Sandals",
+      "Russian": "Сандалии друида",
+      "Material": {
+        "Cloth": 8,
+        "Artifact": "SHOES_CLOTH_KEEPER"
+      }
+    },
+    "Feyscale Hat": {
+      "code_name": "HEAD_CLOTH_FEY",
+      "English": "Feyscale Hat",
+      "Russian": "Шляпа фей",
+      "Material": {
+        "Cloth": 8,
+        "Artifact": "HEAD_CLOTH_FEY"
+      }
+    },
+    "Feyscale Robe": {
+      "code_name": "ARMOR_CLOTH_FEY",
+      "English": "Feyscale Robe",
+      "Russian": "Мантия фей",
+      "Material": {
+        "Cloth": 16,
+        "Artifact": "ARMOR_CLOTH_FEY"
+      }
+    },
+    "Feyscale Sandals": {
+      "code_name": "SHOES_CLOTH_FEY",
+      "English": "Feyscale Sandals",
+      "Russian": "Сандалии фей",
+      "Material": {
+        "Cloth": 8,
+        "Artifact": "SHOES_CLOTH_FEY"
+      }
+    },
+    "Cowl of Purity": {
+      "code_name": "HEAD_CLOTH_UNDEAD",
+      "English": "Cowl of Purity",
+      "Russian": "Капюшон чистоты",
+      "Material": {
+        "Cloth": 8,
+        "Artifact": "HEAD_CLOTH_UNDEAD"
+      }
+    },
+    "Robe of Purity": {
+      "code_name": "ARMOR_CLOTH_UNDEAD",
+      "English": "Robe of Purity",
+      "Russian": "Мантия чистоты",
+      "Material": {
+        "Cloth": 16,
+        "Artifact": "ARMOR_CLOTH_UNDEAD"
+      }
+    },
+    "Sandals of Purity": {
+      "code_name": "SHOES_CLOTH_UNDEAD",
+      "English": "Sandals of Purity",
+      "Russian": "Сандалии чистоты",
+      "Material": {
+        "Cloth": 8,
+        "Artifact": "SHOES_CLOTH_UNDEAD"
+      }
+    }
+  }
+}

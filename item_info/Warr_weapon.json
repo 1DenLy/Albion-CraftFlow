@@ -1,0 +1,160 @@
+{
+    "Swords":{
+        "Broadsword":{
+            "code_name":"MAIN_SWORD",
+            "English":"Broadsword",
+            "Russian":"Палаш",
+            "Material":{
+                "Steel Bar":16,
+                "Leather":8
+            }
+        },
+        "Claymore":{
+            "code_name":"2H_CLAYMORE",
+            "English":"Claymore",
+            "Russian":"Клеймор",
+            "Material":{
+                "Steel Bar":20,
+                "Leather":12
+            }
+        },
+        "Dual_Swords":{
+            "code_name":"2H_DUALSWORD",
+            "English":"Dual Swords",
+            "Russian":"Парные мечи",
+            "Material":{
+                "Steel Bar":20,
+                "Leather":12
+            }
+        },
+        "Clarent_Blade":{
+            "code_name":"MAIN_SCIMITAR_MORGANA",
+            "English":"Clarent Blade",
+            "Russian":"Королевский меч",
+            "Material":{
+                "Steel Bar":16,
+                "Leather":8,
+                "Artifact":"ARTEFACT_MAIN_SCIMITAR_MORGANA"
+            }
+        },
+        "Carving_Sword":{
+            "code_name":"2H_CLEAVER_HELL",
+            "English":"Carving Sword",
+            "Russian":"Меч резни",
+            "Material":{
+                "Steel Bar":20,
+                "Leather":12,
+                "Artifact":"ARTEFACT_2H_CLEAVER_HELL"
+            }
+        },
+        "Galatine_Pair":{
+            "code_name":"2H_DUALSCIMITAR_UNDEAD",
+            "English":"Galatine Pair",
+            "Russian":"Парные галатины",
+            "Material":{
+                "Steel Bar":20,
+                "Leather":12,
+                "Artifact":"ARTEFACT_2H_DUALSCIMITAR_UNDEAD"
+            }
+        },
+        "Kingmaker":{
+            "code_name":"2H_CLAYMORE_AVALON",
+            "English":"Kingmaker",
+            "Russian":"Царетворец",
+            "Material":{
+                "Steel Bar":20,
+                "Leather":12,
+                "Artifact":"ARTEFACT_2H_CLAYMORE_AVALON"
+            }
+        },
+        "Infinity_Blade":{
+            "code_name":"MAIN_SWORD_CRYSTAL",
+            "English":"Infinity Blade",
+            "Russian":"Клинок бесконечности",
+            "Material":{
+                "Steel Bar":16,
+                "Leather":8,
+                "Artifact":"ARTEFACT_MAIN_SWORD_CRYSTAL"
+            }
+        }
+    },
+    "Axes": {
+        "Battleaxe": {
+            "code_name": "MAIN_AXE",
+            "English": "Battleaxe",
+            "Russian": "Боевой топор",
+            "Material": {
+                "Planks": 8,
+                "Steel Bar": 16
+            }
+        },
+        "Greataxe": {
+            "code_name": "2H_AXE",
+            "English": "Greataxe",
+            "Russian": "Большой топор",
+            "Material": {
+                "Planks": 12,
+                "Steel Bar": 20
+            }
+        },
+        "Halberd":{
+            "code_name": "2H_HALBERD",
+            "English": "Halberd",
+            "Russian": "Алебарда",
+            "Material": {
+                "Planks": 20,
+                "Steel Bar": 12
+            }
+        },
+        "Carrioncaller":{
+            "code_name": "2H_HALBERD_MORGANA",
+            "English": "Carrioncaller",
+            "Russian": "Падальщик",
+            "Material": {
+                "Planks": 20,
+                "Steel Bar": 12,
+                "Artifact": "ARTEFACT_2H_HALBERD_MORGANA"
+            }
+        },
+        "Infernal_Scythe": {
+            "code_name": "2H_SCYTHE_HELL",
+            "English": "Infernal Scythe",
+            "Russian": "Адская коса",
+            "Material": {
+                "Planks": 12,
+                "Steel Bar": 20,
+                "Artifact": "ARTEFACT_2H_SCYTHE_HELL"
+            }
+        },
+        "Bear_Paws": {
+            "code_name": "2H_DUALAXE_KEEPER",
+            "English": "Bear Paws",
+            "Russian": "Медвежьи лапы",
+            "Material": {
+                "Planks": 12,
+                "Steel Bar": 20,
+                "Artifact": "ARTEFACT_2H_DUALAXE_KEEPER"
+            }
+        },
+        "Realmbreaker":{
+            "code_name": "2H_AXE_AVALON",
+            "English": "Realmbreaker",
+            "Russian": "Разрушитель миров",
+            "Material": {
+                "Planks": 12,
+                "Steel Bar": 20,
+                "Artifact": "ARTEFACT_2H_AXE_AVALON"
+            }
+        },
+        "Crystal_Reaper":{
+            "code_name": "2H_SCYTHE_CRYSTAL",
+            "English": "Crystal Reaper",
+            "Russian": "Хрустальный жнец",
+            "Material": {
+                "Planks": 12,
+                "Steel Bar": 20,
+                "Artifact": "ARTEFACT_2H_SCYTHE_CRYSTAL"
+            }
+        }
+    }
+}

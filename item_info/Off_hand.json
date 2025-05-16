@@ -1,0 +1,156 @@
+{
+  "Offhands": {
+    "Books": {
+      "Tome of Spells": {
+        "code_name": "OFF_BOOK",
+        "English": "Tome of Spells",
+        "Russian": "Книга заклинаний",
+        "Material": {
+          "Cloth": 16
+        }
+      },
+      "Eye of Secrets": {
+        "code_name": "OFF_ORB_MORGANA",
+        "English": "Eye of Secrets",
+        "Russian": "Око тайны",
+        "Material": {
+            "Cloth": 4,
+            "Leather": 4,
+            "Artifact": "ARTEFACT_OFF_ORB_MORGANA"
+        }
+      },
+      "Taproot": {
+        "code_name": "OFF_TOTEM_KEEPER",
+        "English": "Taproot",
+        "Russian": "Корень природы",
+        "Material": {
+            "Cloth": 4,
+            "Leather": 4,
+            "Artifact": "ARTEFACT_OFF_TOTEM_KEEPER"
+        }
+      },
+      "Celestial Censer": {
+        "code_name": "OFF_CENSER_AVALON",
+        "English": "Celestial Censer",
+        "Russian": "Небесный кадильник",
+        "Material": {
+            "Cloth": 4,
+            "Leather": 4,
+            "Artifact": "ARTEFACT_OFF_CENSER_AVALON"
+        }
+      },
+      "Skull Trophy": {
+        "code_name": "OFF_DEMONSKULL_HELL",
+        "English": "Muisak",
+        "Russian": "Череп-трофей",
+        "Material": {
+          "Cloth": 4,
+          "Leather": 4,
+          "Artifact": "ARTEFACT_OFF_DEMONSKULL_HELL"
+        }
+      }
+    },
+    "Torches": {
+      "Torch": {
+        "code_name": "OFF_TORCH",
+        "English": "Torch",
+        "Russian": "Факел",
+        "Material": {
+            "Planks":4,
+            "Cloth": 4
+        }
+      },
+      "Mistcaller": {
+        "code_name": "OFF_HORN_KEEPER",
+        "English": "Mistcaller",
+        "Russian": "Туманный зов",
+        "Material": {
+            "Planks":4,
+            "Cloth": 4,
+            "Artifact": "ARTEFACT_OFF_HORN_KEEPER"
+        }
+      },
+      "Leering Cane": {
+        "code_name": "OFF_JESTERCANE_HELL",
+        "English": "Leering Cane",
+        "Russian": "Зловещая трость",
+        "Material": {
+            "Planks":4,
+            "Cloth": 4,
+            "Artifact": "ARTEFACT_OFF_JESTERCANE_HELL"
+        }
+      },
+      "Cryptcandle": {
+        "code_name": "OFF_LAMP_UNDEAD",
+        "English": "Cryptcandle",
+        "Russian": "Могильная свеча",
+        "Material": {
+            "Planks":4,
+            "Cloth": 4,
+            "Artifact": "ARTEFACT_OFF_LAMP_UNDEAD"
+        }
+      },
+      "Sacred Scepter": {
+        "code_name": "OFF_TALISMAN_AVALON",
+        "English": "Sacred Scepter",
+        "Russian": "Священный скипетр",
+        "Material": {
+            "Planks":4,
+            "Cloth": 4,
+            "Artifact": "ARTEFACT_OFF_TALISMAN_AVALON"
+        }
+      }
+    },
+    "Shields": {
+      "Shield": {
+        "code_name": "OFF_SHIELD",
+        "English": "Shield",
+        "Russian": "Щит",
+        "Material": {
+            "Planks": 4,
+            "Steel Bar": 4
+        }
+      },
+      "Facebreaker": {
+        "code_name": "OFF_SPIKEDSHIELD_MORGANA",
+        "English": "Facebreaker",
+        "Russian": "Лицелом",
+        "Material": {
+            "Planks": 4,
+            "Steel Bar": 4,
+            "Artifact": "ARTEFACT_OFF_SPIKEDSHIELD_MORGANA"
+        }
+      },
+      "Caitiff_Shield": {
+        "code_name": "OFF_SHIELD_HELL",
+        "English": "Caitiff Shield",
+        "Russian": "Щит негодяя",
+        "Material": {
+            "Planks": 4,
+            "Steel Bar": 4,
+            "Artifact": "ARTEFACT_OFF_SHIELD_HELL"
+        }
+      },
+      "Astral_Aegis": {
+        "code_name": "OFF_SHIELD_AVALON",
+        "English": "Astral Aegis",
+        "Russian": "Эгида звезд",
+        "Material": {
+            "Planks": 4,
+            "Steel Bar": 4,
+            "Artifact": "ARTEFACT_OFF_SHIELD_AVALON"
+        }
+      },
+      "Sarcophagus": {
+        "code_name": "OFF_TOWERSHIELD_UNDEAD",
+        "English": "Sarcophagus",
+        "Russian": "Саркофаг",
+        "Material": {
+            "Planks": 4,
+            "Steel Bar": 4,
+            "Artifact": "ARTEFACT_OFF_TOWERSHIELD_UNDEAD"
+        }
+      }
+    }
+  }
+}

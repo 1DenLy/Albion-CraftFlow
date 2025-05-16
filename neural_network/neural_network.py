@@ -58,7 +58,7 @@ print(f"Average Validation Loss: {average_val_loss}")
 # Обучение на всех данных с количеством эпох, найденным в результате K-fold Cross Validation
 model = create_model()
 early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
-history = model.fit(X, y, batch_size=1, epochs=100, callbacks=[early_stopping])
+history = model.fit(X, y, batch_size=1, epochs=50, callbacks=[early_stopping])
 
 # Предсказание на будущее
 future_steps = 24
