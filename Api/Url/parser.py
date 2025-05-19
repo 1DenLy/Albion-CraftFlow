@@ -2,8 +2,6 @@ import os
 
 import pandas, webbrowser, datetime
 
-from Url_manager.url_generator import UrlGenerator
-
 
 
 class URL_parser():

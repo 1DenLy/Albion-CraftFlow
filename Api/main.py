@@ -7,8 +7,9 @@ from button_logic import ButtonLogic
 from AppManager import AppManager
 
 # Tabs
-from Tabs.Settings.settings_main import Settings_window
+#from Tabs.Settings.settings_main import Settings_window
 from Tabs.Craft.craft_main import Craft_window
+from Url.url_generator import UrlGenerator
 
 
 
@@ -19,13 +20,14 @@ class MyWindow(QMainWindow):
         # Загружаем компоненты
         loadUi("Api\main.ui", self)
 
-        self.tab_load()
+        self.tab_inicial()
         # --------------------------------
 
 
         # Инициализация зависимостей
 
         self.manager = AppManager(app_name="Albion_Data_Manager")
+        self.url_generator = UrlGenerator()
 
 
 
@@ -58,7 +60,7 @@ class MyWindow(QMainWindow):
         """Закрытие вкладки по индексу"""
         self.tab_zone.removeTab(index)
 
-    def tab_load(self):
+    def tab_inicial(self):
         """Загрузка вкладок"""
         self.tab_craft = Craft_window(self)
 

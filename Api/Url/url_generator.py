@@ -20,18 +20,36 @@ RARYTYES = ['', '@1', '@2', '@3', '@4']
 
 
 class UrlGenerator:
-    def __init__(self, parcing_list: list = None, items_info: dict = None):
+    def __init__(self):
 
-        self.parcing_list = parcing_list 
-        self.items_info_list = items_info 
+        self._url = ""
 
-        for it in parcing_list:
-            print(self.get_info_item(item_class= it["class"], item_name= it["item"],))
+        self._items_info = {}
+        self._parcing_list = []
 
+        self._locations_list = []
+
+
+    def set_parcing_list(self, parcing_list):
+        """Set the list of items to parse"""
+        self._parcing_list = parcing_list
+
+    def set_items_info(self, items_info):
+        """Set the list of items to parse"""
+        self._items_info = items_info
+
+    def set_locations_list(self, locations_list):
+        """Set the list of locations to parse"""
+        self._locations_list = locations_list
+
+
+    def get_url(self):
+        self.create_url()
+        return self._url
 
     
     # api/v2/stats/prices/T4_BAG,T5_BAG?locations=Caerleon,Bridgewatch&qualities=2
-    def create_url(self, items_list, locations_list, server_id):
+    def create_url(self, items_list, server_id):
 
         if server_id == "eu":
             server = URL_EUROPE_SERVER
@@ -46,7 +64,7 @@ class UrlGenerator:
         + STATS_PRICES 
         + items_list 
         + LOCATION
-        + locations_list 
+        + self._locations_list 
         + QUALITIES_URL
 
 
@@ -78,10 +96,10 @@ class UrlGenerator:
     def get_info_item(self, item_class, item_name):
         """Returns the code name for the item"""
 
-        if item_class in self.items_info_list:
-            for item in self.items_info_list[item_class]:
+        if item_class in self._items_info:
+            for item in self._items_info[item_class]:
                 if item == item_name:
-                    return self.items_info_list[item_class][item_name]["code_name"]
+                    return self._items_info[item_class][item_name]["code_name"]
         return None  
 
 
