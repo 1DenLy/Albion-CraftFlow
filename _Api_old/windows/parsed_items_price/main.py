@@ -4,7 +4,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 from PyQt5.QtCore import QStringListModel
 
-from Api.windows.parsed_items_price.dialogwind import InfoDialogWindow as info_dialog
+from _Api_old.windows.parsed_items_price.dialogwind import InfoDialogWindow as info_dialog
 
 
 
