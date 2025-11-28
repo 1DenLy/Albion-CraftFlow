@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  # --- 1. База Данных (PostgreSQL) ---
+  db:
+    image: postgres:16-alpine
+    container_name: albion_db
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432" # Открываем порт наружу, чтобы ты мог подключиться через DBeaver/PyCharm
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data # Сохраняем данные на диске, чтобы они не исчезли при перезапуске
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # --- 2. GUI для Базы Данных (Adminer) ---
+  adminer:
+    image: adminer
+    container_name: albion_adminer
+    restart: always
+    ports:
+      - "8080:8080" # Будет доступен в браузере по http://localhost:8080
+    depends_on:
+      - db
+
+  # --- 3. Backend API ---
+  api:
+    build: .
+    container_name: albion_api
+    command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ./src:/app/src # "Hot Reload": меняешь код локально — он обновляется в контейнере
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy # Ждем, пока БД реально запустится
+
+  # --- 4. Worker (Ingestor) ---
+  worker:
+    build: .
+    container_name: albion_worker
+    # Запускает скрипт воркера (пока заглушка, позже заменим на реальный файл)
+    command: python -m src.services.ingestor
+    volumes:
+      - ./src:/app/src
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    # worker не открывает порты наружу, он работает внутри сети
