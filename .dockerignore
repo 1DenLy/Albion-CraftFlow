@@ -1,0 +1,19 @@
+# Игнорируем системные папки и мусор
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+
+# Игнорируем данные и секреты
+pg_data/
+.env
+.env.local
+.git/
+.gitignore
+docker-compose.yml
+Dockerfile
+README.md

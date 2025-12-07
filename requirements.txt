@@ -1,9 +1,24 @@
-fastapi
-uvicorn[standard]
-psycopg2-binary
-alembic
-requests
-sqlalchemy
-asyncpg
-pydantic
-pydantic-settings
+# --- Web Framework ---
+fastapi==0.109.2
+uvicorn[standard]==0.27.1
+
+# --- Database Drivers & ORM ---
+sqlalchemy==2.0.27
+# asyncpg для работы приложения (асинхронно)
+asyncpg==0.29.0
+# psycopg2-binary нужен для Alembic (синхронно)
+psycopg2-binary==2.9.9
+alembic==1.13.1
+
+# --- Configuration & Data Validation ---
+pydantic==2.6.1
+pydantic-settings==2.2.1
+
+# --- HTTP Client (Async) ---
+httpx==0.26.0
+
+# --- Utilities ---
+# greenlet нужен SQLAlchemy для работы с asyncpg
+greenlet==3.0.3
+# python-dotenv нужен для локальной работы pydantic-settings вне докера
+python-dotenv==1.0.1

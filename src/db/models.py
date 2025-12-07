@@ -11,7 +11,8 @@ from sqlalchemy import (
     Index,
     Computed,
     func,
-    text,  # <--- Добавил text
+    text,
+    Boolean,
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from src.db.database import Base
@@ -37,9 +38,7 @@ class Item(Base):
     tier: Mapped[int] = mapped_column(SmallInteger, nullable=False)
     enchantment_level: Mapped[int] = mapped_column(SmallInteger, default=0)
 
-    # ОПТИМИЗАЦИЯ: persisted=False.
-    # Сложение - операция дешевая, хранить результат на диске не выгодно.
-    # Postgres будет считать это на лету при запросе.
+
     effective_tier: Mapped[int] = mapped_column(
         SmallInteger,
         Computed("tier + enchantment_level", persisted=False)
@@ -89,11 +88,6 @@ class MarketPrice(Base):
     location: Mapped["Location"] = relationship()
 
 
-# --- ПАРТИЦИРОВАНИЕ ---
-# СОВЕТ: Пока проект на старте, убери партицирование.
-# Postgres легко держит 10-20 млн строк в одной таблице при наличии индексов.
-# Партицирование добавит тебе боли с администрированием прямо сейчас.
-# Я убрал __table_args__ с партициями для старта. Вернешь, когда база вырастет.
 
 class MarketHistory(Base):
     __tablename__ = "market_history"
@@ -114,3 +108,27 @@ class MarketHistory(Base):
     __table_args__ = (
         Index("idx_history_item_time", "item_id", "location_id", "timestamp"),
     )
+
+
+class TrackedItem(Base):
+    """
+    Таблица для Воркера.
+    Определяет КОНКРЕТНУЮ связку Предмет + Город, которую надо обновлять.
+    """
+    __tablename__ = "tracked_items"
+
+    # первичный ключ составной: (Предмет + Город).
+    item_id: Mapped[int] = mapped_column(ForeignKey("items.id", ondelete="CASCADE"), primary_key=True)
+    location_id: Mapped[int] = mapped_column(ForeignKey("locations.id", ondelete="CASCADE"), primary_key=True)
+
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+
+    priority: Mapped[int] = mapped_column(SmallInteger, default=1, nullable=False)
+
+    last_check: Mapped[Optional[datetime.datetime]] = mapped_column(DateTime(timezone=True))
+
+    item: Mapped["Item"] = relationship()
+    location: Mapped["Location"] = relationship()
+
+    def __repr__(self):
+        return f"<TrackedItem(item={self.item_id}, loc={self.location_id})>"

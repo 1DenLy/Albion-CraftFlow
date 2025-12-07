@@ -1,5 +1,5 @@
 # Используем легкий официальный образ Python
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 # Отключаем создание .pyc файлов и буферизацию вывода (чтобы логи шли сразу)
 ENV PYTHONDONTWRITEBYTECODE 1
