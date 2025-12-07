@@ -41,7 +41,7 @@ class Item(Base):
 
     effective_tier: Mapped[int] = mapped_column(
         SmallInteger,
-        Computed("tier + enchantment_level", persisted=False)
+        Computed("tier + enchantment_level", persisted=True)
     )
 
     display_name: Mapped[Optional[str]] = mapped_column(String(255))

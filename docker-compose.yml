@@ -41,6 +41,8 @@ services:
       - "8000:8000"
     env_file:
       - .env
+    environment:
+      - DB_HOST=db
     depends_on:
       db:
         condition: service_healthy # Ждем, пока БД реально запустится
@@ -55,6 +57,8 @@ services:
       - ./src:/app/src
     env_file:
       - .env
+    environment:
+      - DB_HOST=db
     depends_on:
       db:
         condition: service_healthy
