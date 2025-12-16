@@ -22,3 +22,5 @@ httpx==0.26.0
 greenlet==3.0.3
 # python-dotenv нужен для локальной работы pydantic-settings вне докера
 python-dotenv==1.0.1
+
+requests==2.31.0

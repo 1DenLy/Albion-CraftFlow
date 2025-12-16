@@ -6,7 +6,6 @@ CREATE TABLE locations (
 );
 
 
-
 -- 2. ПРЕДМЕТЫ
 CREATE TABLE items (
     id SERIAL PRIMARY KEY,
