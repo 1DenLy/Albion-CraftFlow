@@ -6,12 +6,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../')))
 
 
-from _Api_old.windows.parsed_items_price.main import Ui_Parcer
+from _Api_old_NOUSE.windows.parsed_items_price.main import Ui_Parcer
 from Url_manager.main import URL_parser
 
 
-from _Api_old.windows.start_window.settingsDialogWindow import SettingsDialog
-from _Api_old.file_manager.file_manager import Files
+from _Api_old_NOUSE.windows.start_window.settingsDialogWindow import SettingsDialog
+from _Api_old_NOUSE.file_manager.file_manager import Files
 
 
 
