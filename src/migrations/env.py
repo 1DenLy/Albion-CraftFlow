@@ -7,26 +7,20 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from alembic import context
 
-# --- 1. ИМПОРТЫ НАШЕГО ПРОЕКТА ---
-# Импортируем конфиг, чтобы взять URL базы
-from src.config import settings
-# Импортируем Base, чтобы Alembic видел структуру моделей
-from src.db.database import Base
-# ВАЖНО: Импортируем ВСЕ модели, чтобы они зарегистрировались в Base.metadata.
-# Даже если PyCharm говорит "Unused import", не удаляй это!
-from src.db.models import Location, Item, MarketPrice, MarketHistory, TrackedItem
+# Config & Models
+from src.config import get_settings
+settings = get_settings()
 
-# --- КОНЕЦ ИМПОРТОВ ---
+from src.db.database import Base
+import src.db.models
 
 config = context.config
 
-# Настройка логирования из alembic.ini
+# Logging
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# --- 2. ПОДМЕНА URL ---
-# Мы берем URL из нашего settings, а не из alembic.ini (там пусто)
-# Перезаписываем опцию sqlalchemy.url в конфигурации Alembic
+# Inject Database URL
 config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
 
 # Указываем метаданные наших моделей
@@ -34,16 +28,7 @@ target_metadata = Base.metadata
 
 
 def run_migrations_offline() -> None:
-    """Run migrations in 'offline' mode.
-
-    This configures the context with just a URL
-    and not an Engine, though an Engine is acceptable
-    here as well.  By skipping the Engine creation
-    we don't even need a DBAPI to be available.
-
-    Calls to context.execute() here emit the given string to the
-    script output.
-    """
+    """Run migrations in 'offline' mode."""
     url = config.get_main_option("sqlalchemy.url")
     context.configure(
         url=url,
@@ -64,11 +49,7 @@ def do_run_migrations(connection: Connection) -> None:
 
 
 async def run_migrations_online() -> None:
-    """Run migrations in 'online' mode.
-
-    In this scenario we need to create an Engine
-    and associate a connection with the context.
-    """
+    """Run migrations in 'online' mode using async engine."""
     # Создаем асинхронный движок, используя конфиг Alembic (куда мы уже подсунули URL)
     connectable = async_engine_from_config(
         config.get_section(config.config_ini_section, {}),
