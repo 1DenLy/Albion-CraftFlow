@@ -47,7 +47,6 @@ class Item(Base):
     display_name: Mapped[Optional[str]] = mapped_column(String(255))
 
     __table_args__ = (
-        # ИСПРАВЛЕНИЕ: используем text() для условия where
         Index(
             "idx_items_high_tier",
             "base_name", "tier", "enchantment_level",
@@ -60,10 +59,10 @@ class Item(Base):
         return f"<Item(id={self.id}, unique='{self.unique_name}')>"
 
 
+
 class MarketPrice(Base):
     __tablename__ = "market_prices"
 
-    # Используем составной первичный ключ из 3-х полей
     item_id: Mapped[int] = mapped_column(ForeignKey("items.id", ondelete="CASCADE"), primary_key=True)
     location_id: Mapped[int] = mapped_column(ForeignKey("locations.id", ondelete="CASCADE"), primary_key=True)
     quality_level: Mapped[int] = mapped_column(SmallInteger, primary_key=True, default=1)
@@ -92,10 +91,6 @@ class MarketPrice(Base):
 class MarketHistory(Base):
     __tablename__ = "market_history"
 
-    # ID пока сделаем просто BigInteger автоинкремент (Identity),
-    # так как без партиций составной ключ не обязателен, но удобен.
-    # Но давай оставим твою структуру ключей, она хорошая.
-
     item_id: Mapped[int] = mapped_column(ForeignKey("items.id"), primary_key=True)
     location_id: Mapped[int] = mapped_column(ForeignKey("locations.id"), primary_key=True)
     quality_level: Mapped[int] = mapped_column(SmallInteger, primary_key=True)
@@ -104,7 +99,6 @@ class MarketHistory(Base):
     item_count: Mapped[int] = mapped_column(BigInteger, default=0)
     average_price: Mapped[int] = mapped_column(BigInteger)
 
-    # Добавляем индексы для ускорения выборок по времени
     __table_args__ = (
         Index("idx_history_item_time", "item_id", "location_id", "timestamp"),
     )

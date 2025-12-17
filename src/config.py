@@ -1,14 +1,14 @@
 from functools import lru_cache
 from typing import Literal
-
 from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    # --- ОБЩИЕ НАСТРОЙКИ ПРИЛОЖЕНИЯ ---
+    # --- ОБЩИЕ НАСТРОЙКИ ---
     MODE: Literal["DEV", "TEST", "PROD"] = "DEV"
     LOG_LEVEL: Literal["DEBUG", "INFO", "WARNING", "ERROR"] = "INFO"
+
 
     # --- НАСТРОЙКИ БАЗЫ ДАННЫХ (PostgreSQL) ---
     DB_HOST: str
@@ -17,12 +17,21 @@ class Settings(BaseSettings):
     DB_PASS: SecretStr
     DB_NAME: str
 
+
+    # SEEDING (Наполнение базы) ---
+    SEED_ITEMS_URL: str = "https://raw.githubusercontent.com/broderickhyman/ao-bin-dumps/master/formatted/items.json"
+    SEED_MIN_TIER: int = 4
+    SEED_MAX_TIER: int = 8
+
+
+
     @property
     def DATABASE_URL(self) -> str:
         """
         Собирает DSN строку для SQLAlchemy асинхронно.
         """
         return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS.get_secret_value()}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+
 
     # --- КОНФИГУРАЦИЯ ЗАГРУЗКИ ---
     model_config = SettingsConfigDict(
@@ -31,9 +40,8 @@ class Settings(BaseSettings):
         extra="ignore"
     )
 
-# --- ИЗМЕНЕНИЕ: ЛЕНИВАЯ ЗАГРУЗКА ---
-# Используем lru_cache, чтобы создать настройки один раз и кэшировать их.
-# Это предотвращает чтение .env файла при каждом вызове функции.
+
+
 @lru_cache
 def get_settings() -> Settings:
     return Settings()
