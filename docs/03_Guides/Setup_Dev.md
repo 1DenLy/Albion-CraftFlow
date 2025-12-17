@@ -25,3 +25,4 @@
     INFO - Inserted chunk: 8540 / 8540
     INFO - Items seeding completed.
     ```
+
