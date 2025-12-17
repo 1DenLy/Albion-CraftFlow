@@ -23,4 +23,5 @@ greenlet==3.0.3
 # python-dotenv нужен для локальной работы pydantic-settings вне докера
 python-dotenv==1.0.1
 
-requests==2.31.0
+httpx>=0.27.0
+sqlalchemy[asyncio]>=2.0.0

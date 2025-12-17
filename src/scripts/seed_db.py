@@ -1,28 +1,29 @@
 import asyncio
-import json
 import logging
 import re
 import sys
-import requests
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
-from sqlalchemy import select, func
+# Используем httpx для асинхронных запросов (pip install httpx)
+import httpx
+from sqlalchemy import select, func, insert
 from sqlalchemy.ext.asyncio import AsyncSession
 
-# Импортируем твои модели и настройки
-# Обрати внимание: скрипт должен запускаться из корня проекта как модуль
-from src.db.database import async_session_factory, engine, Base
+# Импортируем модели и настройки БД
+# Убедитесь, что пути импорта корректны для вашей структуры проекта
+from src.db.database import async_session_maker, engine, Base
 from src.db.models import Item, Location
 
-# Настройка логгера
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
-logger = logging.getLogger(__name__)
+# --- Конфигурация ---
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - [%(levelname)s] - %(name)s - %(message)s"
+)
+logger = logging.getLogger("seed_db")
 
-# URL официального дампа предметов
-ITEMS_JSON_URL = "https://raw.githubusercontent.com/ao-bin-dumps/formatted/master/items.json"
+ITEMS_JSON_URL = "https://raw.githubusercontent.com/broderickhyman/ao-bin-dumps/master/formatted/items.json"
 
-# Основные города Альбиона (API Names)
-# Важно: display_name делаем читаемым
+# Список городов вынесен в константу для легкого редактирования
 CORE_LOCATIONS = [
     {"api_name": "Martlock", "display_name": "Martlock"},
     {"api_name": "Bridgewatch", "display_name": "Bridgewatch"},
@@ -35,71 +36,95 @@ CORE_LOCATIONS = [
 ]
 
 
-async def seed_locations(session: AsyncSession):
-    """Наполняет таблицу locations, если она пуста."""
+# --- Логика Локаций ---
+
+async def seed_locations(session: AsyncSession) -> None:
+    """
+    Проверяет и наполняет таблицу локаций.
+    Использует ORM, так как записей мало (<100).
+    """
     logger.info("Checking locations...")
 
-    # Проверяем, есть ли уже записи
-    result = await session.execute(select(func.count(Location.id)))
-    count = result.scalar()
+    # Оптимизация: проверяем наличие записей через count, чтобы не тянуть данные
+    stmt = select(func.count(Location.id))
+    result = await session.execute(stmt)
+    count = result.scalar() or 0
 
     if count > 0:
         logger.info(f"Locations table already has {count} entries. Skipping.")
         return
 
     logger.info("Seeding locations...")
-    new_locations = [Location(api_name=loc["api_name"], display_name=loc["display_name"]) for loc in CORE_LOCATIONS]
+    new_locations = [
+        Location(api_name=loc["api_name"], display_name=loc["display_name"])
+        for loc in CORE_LOCATIONS
+    ]
     session.add_all(new_locations)
     await session.commit()
-    logger.info(f"Added {len(new_locations)} locations.")
+    logger.info(f"Successfully added {len(new_locations)} locations.")
 
 
-def parse_item_data(item_data: Dict[str, Any]) -> Dict[str, Any] | None:
+# --- Логика Предметов ---
+
+async def fetch_items_data(url: str) -> List[Dict[str, Any]]:
     """
-    Преобразует JSON объект из дампа в словарь для модели Item.
+    Асинхронно скачивает JSON с предметами.
+    """
+    logger.info(f"Downloading items from {url}...")
+    async with httpx.AsyncClient() as client:
+        try:
+            # Увеличиваем timeout, так как файл может быть большим
+            response = await client.get(url, timeout=60.0, follow_redirects=True)
+            response.raise_for_status()
+            data = response.json()
+            logger.info(f"Downloaded {len(data)} items.")
+            return data
+        except httpx.RequestError as e:
+            logger.error(f"Network error while downloading items: {e}")
+            return []
+        except Exception as e:
+            logger.error(f"Unexpected error: {e}")
+            return []
+
+
+def parse_item_dict(raw_item: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    """
+    Чистая функция (Pure Function).
+    Преобразует сырой JSON-объект в словарь, пригодный для вставки в SQL.
     Возвращает None, если предмет нужно пропустить.
     """
-    unique_name = item_data.get("UniqueName")
+    unique_name = raw_item.get("UniqueName")
     if not unique_name:
         return None
 
-    # Фильтр: пропускаем системные предметы, заглушки и прочий мусор
-    # Обычно предметы имеют формат T{tier}_{NAME} или просто NAME
+    # Фильтр мусорных предметов
     if "TEST" in unique_name or "TUTORIAL" in unique_name:
         return None
 
-    # Попытка извлечь имя на английском
-    localized_names = item_data.get("LocalizedNames", {})
-    display_name = localized_names.get("EN-US") if localized_names else unique_name
+    localized = raw_item.get("LocalizedNames", {})
+    display_name = localized.get("EN-US") if localized else unique_name
 
-    # --- Логика разбора имени ---
-    # Пример: T4_MAIN_SWORD@1
-    # Tier: 4
-    # Base: MAIN_SWORD
-    # Enchant: 1
-
+    # Разбор имени: T4_MAIN_SWORD@1
+    # По умолчанию
     tier = 1
     enchantment = 0
     base_name = unique_name
 
-    # 1. Извлекаем Tier (T4_...)
+    # 1. Попытка распарсить Tier и убрать префикс
+    # Ищем паттерн T + цифра + подчеркивание в начале
     tier_match = re.match(r"^T(\d+)_", unique_name)
     if tier_match:
         tier = int(tier_match.group(1))
-        # Убираем префикс T4_ для base_name
+        # Отрезаем "T4_" от начала строки для base_name
         base_name = unique_name[len(tier_match.group(0)):]
 
-    # 2. Извлекаем Enchantment (@1)
+    # 2. Попытка распарсить Enchantment (@X)
     if "@" in base_name:
         parts = base_name.split("@")
         base_name = parts[0]
-        try:
+        # Проверяем, является ли вторая часть числом
+        if len(parts) > 1 and parts[1].isdigit():
             enchantment = int(parts[1])
-        except (IndexError, ValueError):
-            enchantment = 0
-
-    # Если enchantment не нашли в имени, пробуем из JSON (иногда там есть поле)
-    # Но в UniqueName оно надежнее.
 
     return {
         "unique_name": unique_name,
@@ -110,74 +135,91 @@ def parse_item_data(item_data: Dict[str, Any]) -> Dict[str, Any] | None:
     }
 
 
-async def seed_items(session: AsyncSession):
-    """Скачивает и наполняет таблицу items."""
-    logger.info("Checking items...")
+async def bulk_insert_items(session: AsyncSession, items_data: List[Dict[str, Any]]) -> int:
+    """
+    Использует SQLAlchemy Core Insert для максимальной скорости.
+    Вставляет данные пачками.
+    """
+    if not items_data:
+        return 0
 
-    # Если база уже наполнена, не тратим время (там >5000 предметов)
-    result = await session.execute(select(func.count(Item.id)))
-    count = result.scalar()
-    if count > 1000:
-        logger.info(f"Items table already has {count} entries. Skipping download.")
-        return
+    # Размер пачки (Chunk size)
+    CHUNK_SIZE = 5000
+    total_inserted = 0
 
-    logger.info(f"Downloading items.json from {ITEMS_JSON_URL} ...")
-    try:
-        response = requests.get(ITEMS_JSON_URL, stream=True, timeout=30)
-        response.raise_for_status()
-        items_list = response.json()
-    except Exception as e:
-        logger.error(f"Failed to download items: {e}")
-        return
+    # Итерация по списку с шагом CHUNK_SIZE
+    for i in range(0, len(items_data), CHUNK_SIZE):
+        chunk = items_data[i: i + CHUNK_SIZE]
+        # Core statement: insert(Model).values([...])
+        stmt = insert(Item).values(chunk)
 
-    logger.info(f"Downloaded {len(items_list)} raw items. Parsing...")
+        # Если используем PostgreSQL и хотим игнорировать дубликаты (опционально):
+        # from sqlalchemy.dialects.postgresql import insert as pg_insert
+        # stmt = pg_insert(Item).values(chunk).on_conflict_do_nothing()
 
-    batch = []
-    batch_size = 1000
-    total_added = 0
-
-    for raw_item in items_list:
-        parsed = parse_item_data(raw_item)
-        if parsed:
-            # Создаем объект модели
-            item = Item(
-                unique_name=parsed["unique_name"],
-                base_name=parsed["base_name"],
-                tier=parsed["tier"],
-                enchantment_level=parsed["enchantment_level"],
-                display_name=parsed["display_name"]
-            )
-            batch.append(item)
-
-        # Bulk Insert пачками
-        if len(batch) >= batch_size:
-            session.add_all(batch)
-            await session.commit()
-            total_added += len(batch)
-            batch = []
-            logger.info(f"Processed {total_added} items...")
-
-    # Добавляем остаток
-    if batch:
-        session.add_all(batch)
+        await session.execute(stmt)
         await session.commit()
-        total_added += len(batch)
+        total_inserted += len(chunk)
+        logger.info(f"Inserted chunk: {total_inserted} / {len(items_data)}")
 
-    logger.info(f"Successfully seeded {total_added} items.")
+    return total_inserted
 
+
+async def seed_items(session: AsyncSession) -> None:
+    """Оркестратор наполнения предметов."""
+    logger.info("Checking items table...")
+
+    # Быстрая проверка количества
+    count = (await session.execute(select(func.count(Item.id)))).scalar() or 0
+
+    # Если база уже наполнена (например, > 1000 записей), пропускаем
+    if count > 1000:
+        logger.info(f"Items table already contains {count} records. Skipping seed.")
+        return
+
+    # 1. Скачиваем
+    raw_data = await fetch_items_data(ITEMS_JSON_URL)
+    if not raw_data:
+        logger.warning("No data downloaded. Aborting.")
+        return
+
+    # 2. Парсим (CPU-bound операция, но для 5-10к предметов Python справится быстро)
+    # Используем генератор списков для фильтрации None
+    parsed_items = []
+    for raw in raw_data:
+        parsed = parse_item_dict(raw)
+        if parsed:
+            parsed_items.append(parsed)
+
+    logger.info(f"Parsed {len(parsed_items)} valid items ready for insertion.")
+
+    # 3. Вставляем (I/O bound)
+    await bulk_insert_items(session, parsed_items)
+    logger.info("Items seeding completed.")
+
+
+# --- Точка входа ---
 
 async def main():
-    """Точка входа"""
-    # Создаем таблицы, если их нет (на всякий случай)
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
+    try:
+        # Создаем таблицы (в продакшене лучше использовать Alembic миграции)
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
 
-    async with async_session_factory() as session:
-        await seed_locations(session)
-        await seed_items(session)
+        async with async_session_maker() as session:
+            await seed_locations(session)
+            await seed_items(session)
+
+    except Exception as e:
+        logger.critical(f"Critical error during seeding: {e}", exc_info=True)
+    finally:
+        # Корректно закрываем соединение с движком
+        await engine.dispose()
 
 
 if __name__ == "__main__":
+    # Фикс для Windows (ProactorEventLoop)
     if sys.platform == 'win32':
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
     asyncio.run(main())
