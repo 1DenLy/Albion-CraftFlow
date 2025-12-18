@@ -34,7 +34,7 @@ class Item(Base):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     unique_name: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
-    base_name: Mapped[str] = mapped_column(String(50), nullable=False)
+    base_name: Mapped[str] = mapped_column(String(255), nullable=False)
     tier: Mapped[int] = mapped_column(SmallInteger, nullable=False)
     enchantment_level: Mapped[int] = mapped_column(SmallInteger, default=0)
 

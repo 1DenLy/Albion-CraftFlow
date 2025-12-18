@@ -21,30 +21,26 @@ class ItemsSeeder(BaseSeeder[List[Dict[str, Any]]]):
         for entry in raw_data:
             try:
                 # 1. Валидация через Pydantic
-                item_model = self.ItemDTO.model_validate(entry)
+                item_model = ItemDTO.model_validate(entry)
 
-                # --- ФИКС ДЛЯ UNIQUE_HIDEOUT ---
-                # Если base_name пустой, берем display_name, если и он пуст — unique_name
+                # --- ЛОГИКА ОПРЕДЕЛЕНИЯ ИМЕНИ ---
+                # Если base_name нет (оно None из DTO), берем display_name, иначе unique_name
                 final_base_name = item_model.base_name
                 if not final_base_name:
                     final_base_name = item_model.display_name or item_model.unique_name
-                    # Можно добавить лог, чтобы видеть, где сработала подмена
-                    # self.logger.debug(f"Fixed missing base_name for {item_model.unique_name}")
 
-                # 2. Формируем чистый словарь для вставки в БД
+                # 2. Формируем словарь. ВАЖНО: поле 'tier' обязательно для БД!
                 clean_item = {
                     "unique_name": item_model.unique_name,
                     "display_name": item_model.display_name,
-                    "base_name": final_base_name,  # Используем исправленное имя
-                    "enchantment_level": item_model.enchantment_level,  # Убедись, что это поле есть в DTO
-                    # Добавь остальные поля, которые есть в твоей модели БД
+                    "base_name": final_base_name,
+                    "tier": item_model.tier,  # <--- Теперь это свойство есть в DTO
+                    "enchantment_level": item_model.enchantment_level, # <--- И это тоже
                 }
 
                 cleaned_items.append(clean_item)
 
             except (AttributeError, ValueError) as e:
-                # PEP 8: Log exception details [cite: 231]
-                # Логируем и пропускаем только битый элемент
                 self.logger.warning(f"Skipping invalid item {entry.get('UniqueName', 'UNKNOWN')}: {e}")
                 continue
 

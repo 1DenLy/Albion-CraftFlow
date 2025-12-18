@@ -3,7 +3,7 @@ import logging
 import sys
 from pathlib import Path
 
-[cite_start]import logging
+import logging
 
 # --- ВСТАВЛЯЕМ СЮДА ---
 # Отключаем вывод SQL-запросов (оставляем только WARNING и ERROR)

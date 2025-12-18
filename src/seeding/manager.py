@@ -7,6 +7,7 @@ from src.seeding.providers.albion_api import AlbionApiProvider
 from src.seeding.providers.database import DatabaseProvider
 from src.seeding.seeders.items import ItemsSeeder
 from src.seeding.seeders.tracking import TrackedItemsSeeder
+from src.seeding.seeders.locations import LocationsSeeder
 
 
 class SeedingManager:
@@ -23,19 +24,16 @@ class SeedingManager:
         )
 
     async def seed(self):
-        """
-        Запускает процесс наполнения базы данных.
-        Последовательность:
-        1. Items (из внешнего API)
-        2. TrackedItems (связка Items x Locations)
-        """
         self.logger.info("Starting seeding process...")
 
         try:
             # 1. Seed Items
             await self._seed_items()
 
-            # 2. Seed Tracked Items
+            # 2. Seed Locations (НОВЫЙ ШАГ)
+            await self._seed_locations()
+
+            # 3. Seed Tracked Items
             if self.config.enable_tracking_seeding:
                 await self._seed_tracked_items()
 
@@ -51,8 +49,13 @@ class SeedingManager:
         seeder = ItemsSeeder(self.session, self.config, provider)
         await seeder.run()
 
+    async def _seed_locations(self):
+        self.logger.info("Initializing LocationsSeeder...")
+        seeder = LocationsSeeder(self.session)
+        await seeder.run()
+
     async def _seed_tracked_items(self):
         self.logger.info("Initializing TrackedItemsSeeder...")
-        provider = DatabaseProvider(self.session)
+        provider = DatabaseProvider(self.session, resource_only=True)
         seeder = TrackedItemsSeeder(self.session, provider)
         await seeder.run()
