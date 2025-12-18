@@ -52,7 +52,7 @@ services:
     build: .
     container_name: albion_worker
     # Запускает скрипт воркера (пока заглушка, позже заменим на реальный файл)
-    command: python -m src.services.ingestor
+    command: python -m src.services.ingesting
     volumes:
       - ./src:/app/src
     env_file:

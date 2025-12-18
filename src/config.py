@@ -24,6 +24,15 @@ class Settings(BaseSettings):
     SEED_MAX_TIER: int = 8
     ENABLE_TRACKING_SEEDING: bool = True
 
+    # Albion API Settings
+    ALBION_API_URL: str = "https://europe.albion-online-data.com/api/v2/stats/prices"
+
+    # Ingestor Settings
+    INGESTOR_BATCH_SIZE: int = 40
+    INGESTOR_CONCURRENCY: int = 1
+    INGESTOR_RATE_LIMIT: float = 1.0
+    INGESTOR_SLEEP_SEC: int = 30
+
 
     @property
     def DATABASE_URL(self) -> str:
