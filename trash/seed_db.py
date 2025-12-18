@@ -10,9 +10,9 @@ logging.basicConfig(
 logger = logging.getLogger("seed_db_script")
 
 
-from src.db.database import async_session_maker, engine, Base
-from src.services.data_loader import AlbionDataLoader
-from src.services.seeder import DatabaseSeeder
+from src.db.database import async_session_maker, engine
+from trash.data_loader import AlbionDataLoader
+from trash.seeder import DatabaseSeeder
 
 
 async def main():

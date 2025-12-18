@@ -24,7 +24,7 @@ if current_dir not in sys.path:
 try:
     # ИМПОРТИРУЕМ НОВЫЕ КЛАССЫ, А НЕ СТАРЫЕ ФУНКЦИИ
     from src.config import get_settings
-    from src.services.data_loader import AlbionDataLoader
+    from trash.data_loader import AlbionDataLoader
 except ImportError as e:
     print("!!! Ошибка импорта. Проверьте, что вы находитесь в корне проекта.")
     print(f"Ошибка: {e}")

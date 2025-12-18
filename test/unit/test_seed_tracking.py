@@ -1,11 +1,8 @@
 import pytest
-import os
-import json
 from unittest.mock import patch, AsyncMock, MagicMock, mock_open
-from sqlalchemy import select
 
 # Импортируем тестируемую функцию
-from src.scripts.seed_tracking import seed_tracking_data
+from trash.seed_tracking import seed_tracking_data
 
 # Мок данные для тестов
 MOCK_RESOURCES_JSON = '["T4_ORE", "T4_WOOD"]'
