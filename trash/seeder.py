@@ -33,10 +33,10 @@ class DatabaseSeeder:
             logger.info(f"Locations table already has {count} entries. Skipping.")
             return
 
-        logger.info("Seeding locations...")
-        # Используем bulk insert через ORM или Core
-        # Core быстрее, но ORM привычнее. Здесь Core insert для скорости не критичен (мало записей),
-        # но для единообразия с items используем Core style.
+        logger.info("seeding locations...")
+        # Используем bulk insert через ORM или core
+        # core быстрее, но ORM привычнее. Здесь core insert для скорости не критичен (мало записей),
+        # но для единообразия с items используем core style.
         await self.session.execute(insert(Location).values(CORE_LOCATIONS))
         await self.session.commit()
         logger.info("Locations seeded.")

@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     SEED_ITEMS_URL: str = "https://raw.githubusercontent.com/broderickhyman/ao-bin-dumps/master/formatted/items.json"
     SEED_MIN_TIER: int = 4
     SEED_MAX_TIER: int = 8
-
+    ENABLE_TRACKING_SEEDING: bool = True
 
 
     @property

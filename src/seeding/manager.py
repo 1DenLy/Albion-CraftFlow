@@ -39,10 +39,10 @@ class SeedingManager:
             if self.config.enable_tracking_seeding:
                 await self._seed_tracked_items()
 
-            self.logger.info("Seeding completed successfully.")
+            self.logger.info("seeding completed successfully.")
 
         except Exception as e:
-            self.logger.error("Seeding process aborted due to error.")
+            self.logger.error("seeding process aborted due to error.")
             raise e
 
     async def _seed_items(self):

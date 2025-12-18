@@ -1,0 +1,216 @@
+Техническое Задание: Тестирование подсистемы Seeding (v1.1)
+1. Цели тестирования
+Обеспечить гарантию качества (QA) и безопасности для подсистемы сидинга данных.
+
+Изоляция (Isolation): Строгое разделение проверки бизнес-логики (Pure Functions) и интеграции с БД/Сетью.
+
+Безопасность (Security): [NEW] Проверка устойчивости к инъекциям, переполнениям и некорректным данным из внешних источников.
+
+Идемпотентность: Подтверждение того, что повторный запуск тестов/сидеров не дублирует данные и не нарушает целостность БД.
+
+Устойчивость: Проверка поведения при сетевых сбоях и аномально больших ответах API.
+
+2. Стек технологий
+Runner: pytest
+
+Async Support: pytest-asyncio (Mode: auto или строгие маркеры).
+
+Mocking: respx (для HTTP), pytest-mock.
+
+DB Testing: SQLAlchemy (AsyncSession) + Transaction Rollback стратегия.
+
+Data Generation: [UPDATED] Polyfactory (Обязательно). Использование хардкодных словарей ("magic dicts") в интеграционных тестах запрещено.
+
+Coverage: pytest-cov.
+
+3. Структура тестов
+Структура должна зеркалить исходный код, с явным выделением фабрик:
+
+Plaintext
+
+tests/
+├── fixtures/
+│   ├── factories.py            # [NEW] Фабрики Polyfactory для моделей БД
+│   └── payloads.py             # [NEW] Примеры JSON-ответов (valid, malformed, malicious)
+├── seeding/
+│   ├── conftest.py             # Общие фикстуры (mock_session, settings)
+│   ├── unit/                   # Юнит-тесты (Strictly NO DB, NO Network)
+│   │   ├── test_config.py
+│   │   ├── test_albion_provider.py
+│   │   ├── test_items_transformer.py  # [RENAMED] Тест чистой логики трансформации
+│   │   └── test_manager.py
+│   └── integration/            # Тесты с реальной (тестовой) БД
+        ├── test_items_persistence.py
+        └── test_tracking_persistence.py
+4. Сценарии тестирования (Test Cases)
+4.1. Unit Testing: Конфигурация и Безопасность окружения
+А. test_config.py
+
+Цель: Проверка валидации Pydantic V2 и безопасной работы с секретами.
+
+Сценарии:
+
+Input: batch_size=0 -> Expect: ValidationError.
+
+Input: items_source_url="not_url" -> Expect: ValidationError.
+
+Input: min_tier > max_tier -> Expect: ValidationError.
+
+[Security] Secrets Leak check: Убедиться, что при логировании конфига (если есть метод __str__ или repr) не утекают ключи/пароли (если они будут добавлены).
+
+[Env Vars]: Проверить загрузку через переменные окружения, используя monkeypatch. Тесты не должны содержать реальных кредов.
+
+Б. test_albion_provider.py
+
+Цель: Проверка обработки сетевых ответов и Resilience (устойчивости).
+
+Сценарии:
+
+Success: Валидный JSON -> Список объектов.
+
+Retries: 500 -> 500 -> 200 (Проверка работы декоратора ретраев).
+
+Fatal Error: 404 или Auth Error -> Custom Exception (Graceful shutdown).
+
+[Security/DoS] Large Payload: Замокать ответ размером 50MB. Проверить, что парсер не падает с OOM (или падает контролируемо), если установлен лимит.
+
+[Security] Malformed JSON: Приход невалидного JSON (обрыв строки) -> Логирование ошибки, приложение не крашится.
+
+4.2. Unit Testing: Бизнес-логика (Pure Logic & Transformation)
+В. test_items_transformer.py [UPDATED]
+
+Архитектурное требование: Тестировать не метод Seeder.run, а выделенный статический метод или класс ItemTransformer.transform(raw_data).
+
+Зависимости: session и provider должны быть None.
+
+Параметризация (Logic & Security):
+
+Python
+
+@pytest.mark.parametrize("raw_item, expected", [
+    # --- Logic Checks ---
+    ({"UniqueName": "T4_WOOD"}, {"tier": 4, "enchantment": 0}),
+    ({"UniqueName": "T1_WOOD"}, None),  # Filtered out
+
+    # --- Security & Fuzzing Checks [NEW] ---
+    # XSS Injection attempt in name
+    ({"UniqueName": "<script>alert(1)</script>"}, None), # Либо sanitize, либо None
+    # SQL Injection attempt
+    ({"UniqueName": "T4_WOOD'; DROP TABLE items;--"}, {"tier": 4}), # Должно пройти как строка, но не сломать парсер
+    # Integer Overflow / Boundary
+    ({"UniqueName": "T99999_WOOD"}, None),
+])
+def test_transform_security_and_logic(raw_item, expected):
+    ...
+4.3. Integration Testing: Persistence (БД)
+Примечание: Использовать async_db_session с авто-роллбэком.
+
+Г. test_items_persistence.py
+
+Принцип: Arrange (с помощью Polyfactory) -> Act (Seeder.save) -> Assert (Select из БД).
+
+Сценарии:
+
+Insert: Сохранение списка валидных DTO.
+
+Idempotency (Upsert):
+
+Шаг 1: Вставить Item(id="T4_BAG", price=100).
+
+Шаг 2: Запустить сидер с Item(id="T4_BAG", price=200).
+
+Assert: Count == 1, Price == 200.
+
+Batching: Проверка через spy на session.execute, что вставка идет батчами (например, по 1000 записей).
+
+Д. test_tracking_persistence.py
+
+Сценарий Conflict (Do Nothing):
+
+Arrange: Создать TrackedItem через фабрику, установить вручную is_active=False.
+
+Act: Запустить сидер, который пытается добавить этот же предмет (по умолчанию активный).
+
+Assert: Состояние в БД осталось is_active=False (стратегия ON CONFLICT DO NOTHING для пользовательских полей).
+
+4.4. Unit/Integration: Manager & Flow
+Е. test_manager.py
+
+Mocking: Полный мок сидеров (ItemsSeeder, TrackingSeeder).
+
+Сценарии:
+
+Partial Failure: ItemsSeeder упал с ошибкой.
+
+Assert: Ошибка залогирована.
+
+Assert: TrackingSeeder не запущен (или запущен, в зависимости от бизнес-требований — уточнить Fail-fast стратегию).
+
+5. Definition of Done (DoD) для тестов
+Code Style:
+
+Строгое следование паттерну AAA (Arrange-Act-Assert). Комментарии # Arrange, # Act, # Assert желательны в сложных тестах.
+
+Нейминг тестов: test_<unit>__<condition>__<expectation>.
+
+Архитектура (SOLID):
+
+В Unit-тесты логики (п. 4.2) запрещено передавать мок сессии БД. Если метод требует сессию, значит логика не отделена — рефакторить код.
+
+Данные:
+
+Использование Polyfactory для генерации моделей БД.
+
+Запрет на использование реальных API ключей (использовать фейковые значения в фикстурах).
+
+Coverage:
+
+Core Business Logic (Transformers/Parsers): > 95%.
+
+Integration/Providers: > 80%.
+
+Asserts:
+
+Запрещено использование assert True (generic checks). Проверять конкретные поля и состояния.
+
+6. Пример реализации (Refined Snippet)
+Файл: tests/seeding/unit/test_items_transformer.py
+
+Python
+
+import pytest
+from src.seeding.logic.transformers import ItemTransformer
+# Предполагаем, что логика вынесена в отдельный класс ItemTransformer по SRP
+
+@pytest.mark.parametrize("raw_input, expected_result_meta", [
+    # Case 1: Valid Logic
+    ({"UniqueName": "T4_WOOD"}, {"tier": 4, "enchantment": 0}),
+
+    # Case 2: Validation Logic (Too low tier)
+    ({"UniqueName": "T1_WOOD"}, None),
+
+    # Case 3: Security - XSS payload (should be sanitized or handled safely)
+    ({"UniqueName": "<script>alert('xss')</script>"}, None),
+
+    # Case 4: Security - Garbage data
+    ({"UniqueName": None}, None),
+    ({}, None),
+])
+def test_transform_item__input_validation_and_security(raw_input, expected_result_meta):
+    # Arrange
+    # Конфиг мокаем, так как он нужен для логики фильтрации (min/max tier)
+    mock_config = MockConfig(min_tier=3, max_tier=8)
+    transformer = ItemTransformer(config=mock_config)
+
+    # Act
+    # Метод transform принимает один элемент или список, возвращает DTO (не ORM модель!)
+    result = transformer.transform_single(raw_input)
+
+    # Assert
+    if expected_result_meta is None:
+        assert result is None, f"Input {raw_input} should be filtered out"
+    else:
+        assert result is not None
+        assert result.tier == expected_result_meta["tier"]
+        assert result.enchantment == expected_result_meta["enchantment"]
+        # Проверяем, что XSS теги не попали в result.unique_name, если ожидался успех
