@@ -2,7 +2,7 @@ import asyncio
 import logging
 import signal
 import sys
-from datetime import timedelta  # <--- Добавлен импорт
+from datetime import timedelta
 from aiolimiter import AsyncLimiter
 
 # Настройка логирования для воркера
@@ -41,24 +41,32 @@ def handle_signal(signum, frame):
 async def main():
     logger.info("Starting Ingestor Worker...")
 
-    # 1. Загрузка конфигурации (Singleton)
+    # 1. Загружаем конфиг ПЕРВЫМ делом
     config = IngestorConfig()
 
-    # Рекомендуется установить max_rate=0.85 в env для запаса по лимитам
     logger.info(f"Config loaded. Max Rate: {config.max_rate}/s, Concurrency: {config.concurrency}")
 
-    # 2. Инициализация долгоживущих объектов (Singleton)
-    # RateLimiter создается ОДИН раз, чтобы лимиты не сбрасывались
-    global_limiter = AsyncLimiter(max_rate=config.max_rate, time_period=1.0)
+    # 2. Инициализация RateLimiter (Singleton)
+    if config.max_rate < 1:
+        # Например: 0.6 req/s -> 1 запрос каждые ~1.66 сек
+        limiter_rate = 1
+        limiter_period = 1.0 / config.max_rate
+    else:
+        # Например: 5 req/s -> 5 запросов каждые 1.0 сек
+        limiter_rate = config.max_rate
+        limiter_period = 1.0
 
-    client = AlbionApiClient()
+    global_limiter = AsyncLimiter(max_rate=limiter_rate, time_period=limiter_period)
+
+    # 3. Инициализация остальных синглтонов
+    client = AlbionApiClient(config)
     processor = PriceProcessor()
 
     logger.info("Worker initialized. Entering main loop...")
 
     while running:
         try:
-            # 3. Unit of Work: Создаем новую сессию на каждую итерацию цикла
+            # 4. Unit of Work: Создаем новую сессию на каждую итерацию цикла
             async with async_session_maker() as session:
                 repo = IngestorRepository(session)
 
@@ -70,22 +78,21 @@ async def main():
                     limiter=global_limiter
                 )
 
-                # 4. Получение задач
-                # Запрашиваем предметы, которые не обновлялись более 30 минут
+                # 5. Получение задач (SELECT)
+                # Это действие открывает неявную транзакцию
                 tasks_map = await repo.get_outdated_items(
                     batch_size=50,
-                    min_update_interval=timedelta(minutes=30)  # <--- Задержка 30 мин
+                    min_update_interval=timedelta(minutes=30)
                 )
 
                 if not tasks_map:
                     logger.info("All tracked items are fresh (< 30 min). Sleeping 60s...")
-                    # Если задач нет, спим и ждем пока предметы "постареют"
                     for _ in range(60):
                         if not running: break
                         await asyncio.sleep(1)
                     continue
 
-                # 5. Выполнение задач
+                # 6. Выполнение задач
                 for location_api_name, items in tasks_map.items():
                     if not running:
                         logger.info("Shutdown signal received during task processing. Breaking loop.")
@@ -94,12 +101,12 @@ async def main():
                     # Логируем начало работы над пачкой
                     logger.info(f"Processing batch: Location='{location_api_name}', Items={len(items)}")
 
-                    # Делегируем выполнение сервису
+                    # Делегируем выполнение сервису (внутри будет новая транзакция на запись)
                     await service.start(location_api_name, items)
 
         except Exception as e:
             logger.exception(f"Unexpected error in main worker loop: {e}")
-            # Пауза перед ретраем, чтобы не спамить в логи при отвале БД
+            # Пауза перед ретраем при ошибке (например, отвал БД)
             await asyncio.sleep(5)
 
     logger.info("Worker process finished successfully.")

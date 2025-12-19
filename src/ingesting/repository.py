@@ -1,10 +1,9 @@
 from typing import List, Dict, Any
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, update, and_, or_  # <--- Добавлен or_
+from sqlalchemy import select, update, and_, or_
 from sqlalchemy.dialects.postgresql import insert as pg_insert
-from datetime import datetime, timezone, timedelta  # <--- Добавлена timedelta
+from datetime import datetime, timezone, timedelta
 
-# Импортируем только нужные модели.
 from src.db.models import TrackedItem, Location, MarketPrice, Item
 
 
@@ -25,33 +24,28 @@ class IngestorRepository:
         return {row.unique_name: row.id for row in result.all()}
 
     async def get_outdated_items(
-        self,
-        batch_size: int,
-        min_update_interval: timedelta  # <--- Новый аргумент
+            self,
+            batch_size: int,
+            min_update_interval: timedelta
     ) -> Dict[str, List[str]]:
         """
-        Возвращает предметы, которые не обновлялись дольше, чем min_update_interval.
+        Возвращает мапу {location_api_name: [item_unique_name, ...]}.
+        Выбираем TrackedItems, у которых last_check старый или None.
         """
-        # Вычисляем время, раньше которого данные считаются "протухшими"
-        # Используем UTC, так как в БД храним timezone-aware datetime
-        threshold_time = datetime.now(timezone.utc) - min_update_interval
+        # Считаем "протухшим" временем: сейчас - интервал
+        cutoff_time = datetime.now(timezone.utc) - min_update_interval
 
         stmt = (
             select(Item.unique_name, Location.api_name)
             .join(TrackedItem, TrackedItem.item_id == Item.id)
             .join(Location, TrackedItem.location_id == Location.id)
+            .where(TrackedItem.is_active == True)
             .where(
-                and_(
-                    TrackedItem.is_active == True,
-                    # Условие: Либо last_check пуст (никогда не проверяли),
-                    # Либо last_check меньше (старее), чем пороговое время
-                    or_(
-                        TrackedItem.last_check == None,
-                        TrackedItem.last_check < threshold_time
-                    )
+                or_(
+                    TrackedItem.last_check == None,
+                    TrackedItem.last_check < cutoff_time
                 )
             )
-            # Сортируем: сначала NULL (самые приоритетные), потом самые старые
             .order_by(TrackedItem.last_check.asc().nulls_first())
             .limit(batch_size)
         )
@@ -59,43 +53,53 @@ class IngestorRepository:
         result = await self.session.execute(stmt)
         rows = result.all()
 
-        grouped_items: Dict[str, List[str]] = {}
-        for unique_name, loc_api_name in rows:
-            if loc_api_name not in grouped_items:
-                grouped_items[loc_api_name] = []
-            grouped_items[loc_api_name].append(unique_name)
+        tasks = {}
+        for item_name, loc_name in rows:
+            if loc_name not in tasks:
+                tasks[loc_name] = []
+            tasks[loc_name].append(item_name)
 
-        return grouped_items
+        return tasks
 
     async def save_batch_results(
             self,
-            prices: List[Dict[str, Any]],
-            item_unique_names: List[str],
+            prices_data: List[Dict[str, Any]],
+            items_checked: List[str],
             location_id: int
-    ):
+    ) -> None:
         """
-        Сохраняет только MarketPrice и обновляет TrackedItem.
+        Сохраняет цены и обновляет время проверки у предметов.
+        Транзакционно.
         """
+
+        # --- ИСПРАВЛЕНИЕ ОШИБКИ ТРАНЗАКЦИЙ ---
+        # Проверяем, не открыта ли уже транзакция (неявная от SELECT).
+        # Если да - коммитим её, чтобы начать чистый блок begin().
+        if self.session.in_transaction():
+            await self.session.commit()
+        # -------------------------------------
+
         async with self.session.begin():
-            # 1. Резолвим Item IDs (строки в int)
-            incoming_names = [p['item_id'] for p in prices]
-            all_names_to_resolve = list(set(incoming_names + item_unique_names))
+            # 1. Сначала нужно получить ID предметов
+            all_names = set(items_checked)
+            for p in prices_data:
+                all_names.add(p['item_id'])
 
-            name_to_id_map = await self.get_item_map(all_names_to_resolve)
+            # Преобразуем set в list для in_
+            name_to_id_map = await self.get_item_map(list(all_names))
 
-            # Фильтруем и маппим цены (подставляем int ID)
-            valid_prices = []
-            for p in prices:
-                if p['item_id'] in name_to_id_map:
-                    p['item_id'] = name_to_id_map[p['item_id']]
-                    p['location_id'] = location_id
-                    valid_prices.append(p)
+            # 2. Upsert Prices
+            clean_prices = []
+            for p in prices_data:
+                i_id = name_to_id_map.get(p['item_id'])
+                if i_id:
+                    p_copy = p.copy()
+                    p_copy['item_id'] = i_id
+                    p_copy['location_id'] = location_id
+                    clean_prices.append(p_copy)
 
-            # 2. Upsert Market Prices
-            if valid_prices:
-                stmt_price = pg_insert(MarketPrice).values(valid_prices)
-
-                # Обновляем все поля при конфликте
+            if clean_prices:
+                stmt_price = pg_insert(MarketPrice).values(clean_prices)
                 stmt_price = stmt_price.on_conflict_do_update(
                     index_elements=['item_id', 'location_id', 'quality_level'],
                     set_={
@@ -115,7 +119,8 @@ class IngestorRepository:
                 await self.session.execute(stmt_price)
 
             # 3. Обновляем Tracked Items (время проверки)
-            tracked_ids_int = [name_to_id_map[name] for name in item_unique_names if name in name_to_id_map]
+            # Берем только те предметы, которые реально существуют в items
+            tracked_ids_int = [name_to_id_map[name] for name in items_checked if name in name_to_id_map]
 
             if tracked_ids_int:
                 update_stmt = (
