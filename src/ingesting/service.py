@@ -1,99 +1,97 @@
 import asyncio
 import logging
-from asyncio import Semaphore
-from typing import Dict
+from aiolimiter import AsyncLimiter
+from typing import List
 
-from src.config import settings
-from src.db.database import async_session_factory
-from src.ingesting.repository import IngestorRepository
-from src.ingesting.client import AlbionApiClient
+from src.ingesting.config import IngestorConfig
 from src.ingesting.processor import PriceProcessor
+from src.ingesting.interfaces import IAlbionApiClient, IIngestorRepository
 
 logger = logging.getLogger(__name__)
 
 
 class IngestorService:
-    def __init__(self, client: AlbionApiClient, processor: PriceProcessor):
+    def __init__(
+            self,
+            client: IAlbionApiClient,
+            repository: IIngestorRepository,  # В тестах сюда придет Mock, в проде - репозиторий с сессией
+            processor: PriceProcessor,
+            config: IngestorConfig
+    ):
         self.client = client
+        self.repository = repository
         self.processor = processor
-        self.semaphore = Semaphore(settings.INGESTOR_CONCURRENCY)
+        self.config = config
+
+        # Rate Limiter: max_rate запросов в 1 секунду
+        # Token Bucket алгоритм внутри
+        self.limiter = AsyncLimiter(max_rate=config.max_rate, time_period=1.0)
+
+        self._location_map = {}
         self.running = True
-        self._location_map: Dict[str, int] = {}
 
     async def _init_cache(self):
-        async with async_session_factory() as session:
-            repo = IngestorRepository(session)
-            self._location_map = await repo.get_location_map()
+        """Загрузка кэша локаций."""
+        self._location_map = await self.repository.get_location_map()
         logger.info(f"Loaded {len(self._location_map)} locations into cache")
 
-    async def start(self):
-        logger.info("Starting Ingestor Worker...")
-        try:
-            await self._init_cache()
-        except Exception as e:
-            logger.critical(f"Failed to initialize location cache: {e}")
+    async def start(self, location_api_name: str, items: List[str]):
+        """
+        Основная точка входа для запуска воркера (упрощена для примера).
+        Принимает город и список предметов для обработки.
+        """
+        await self._init_cache()
+        await self._process_location(location_api_name, items)
+
+    async def _process_location(self, city_api_name: str, items: List[str]):
+        location_id = self._location_map.get(city_api_name)
+        if not location_id:
+            logger.error(f"Location '{city_api_name}' not found. Skipping.")
             return
 
-        try:
-            while self.running:
-                await self._worker_loop()
-        except asyncio.CancelledError:
-            logger.info("Ingestor Worker cancelled.")
-        except Exception as e:
-            logger.exception(f"Critical error in Ingestor Worker: {e}")
-        finally:
-            logger.info("Ingestor Worker stopped.")
+        # SC-04: Batching Strategy. Разбиваем список предметов на чанки.
+        batches = [
+            items[i: i + self.config.batch_size]
+            for i in range(0, len(items), self.config.batch_size)
+        ]
 
-    async def _worker_loop(self):
-        async with async_session_factory() as session:
-            repo = IngestorRepository(session)
-            tasks_by_city = await repo.get_outdated_items(settings.INGESTOR_BATCH_SIZE)
+        logger.info(f"Processing {city_api_name}: {len(items)} items in {len(batches)} batches.")
 
-            if not tasks_by_city:
-                logger.info(f"No tasks found. Sleeping for {settings.INGESTOR_SLEEP_SEC}s")
-                await asyncio.sleep(settings.INGESTOR_SLEEP_SEC)
-                return
+        # Ограничиваем параллелизм задач, но RateLimit контролируется отдельным лимитером
+        # Если нужно строго последовательно - убираем gather и делаем for await.
+        # Для соблюдения RateLimit при gather, limiter.acquire() должен быть внутри корутины.
 
-            coroutines = []
-            for city_api_name, items in tasks_by_city.items():
-                coroutines.append(self._process_location(city_api_name, items))
+        tasks = []
+        for batch in batches:
+            tasks.append(self._process_batch(batch, city_api_name, location_id))
 
-            await asyncio.gather(*coroutines)
+        # Запускаем пачками по concurrency (настройка параллелизма)
+        # Это предотвращает создание 1000 тасок в event loop сразу
+        concurrency_sem = asyncio.Semaphore(self.config.concurrency)
 
-    async def _process_location(self, city_api_name: str, items: list[str]):
-        async with self.semaphore:
-            location_id = self._location_map.get(city_api_name)
+        async def sem_task(task):
+            async with concurrency_sem:
+                return await task
 
-            if not location_id:
-                logger.error(f"Location '{city_api_name}' not found in cache. Skipping batch.")
-                return
+        await asyncio.gather(*(sem_task(t) for t in tasks))
 
-            logger.info(f"Processing {city_api_name} (ID: {location_id}): {len(items)} items")
-
+    async def _process_batch(self, batch_items: List[str], city_api_name: str, location_id: int):
+        # SC-03: Rate Limiting. Ждем разрешения перед отправкой запроса.
+        async with self.limiter:
             try:
                 # A: Network
-                raw_dtos = await self.client.fetch_prices(items, city_api_name)
+                raw_dtos = await self.client.fetch_prices(batch_items, city_api_name)
 
-                # B: Logic (ТОЛЬКО ЦЕНЫ)
+                # B: Logic
                 prices_data = self.processor.process(raw_dtos)
 
-                # C: DB Transaction
-                async with async_session_factory() as session:
-                    repo = IngestorRepository(session)
-                    # Сохраняем только цены и обновляем last_check
-                    await repo.save_batch_results(
+                # C: DB (Repository вызов)
+                if prices_data or raw_dtos == []:
+                    # Даже если пусто, надо обновить дату проверки items (в реализации репо)
+                    await self.repository.save_batch_results(
                         prices_data,
-                        items,
+                        batch_items,
                         location_id
                     )
-
-                logger.info(f"Successfully processed {city_api_name}")
-
             except Exception as e:
-                logger.exception(f"Error processing location {city_api_name}: {e}")
-
-            await asyncio.sleep(settings.INGESTOR_RATE_LIMIT)
-            await asyncio.sleep(3.0)
-
-    def stop(self):
-        self.running = False
+                logger.exception(f"Error processing batch for {city_api_name}: {e}")
