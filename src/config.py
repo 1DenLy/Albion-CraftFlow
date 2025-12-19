@@ -28,9 +28,9 @@ class Settings(BaseSettings):
     ALBION_API_URL: str = "https://europe.albion-online-data.com/api/v2/stats/prices"
 
     # Ingestor Settings
-    INGESTOR_BATCH_SIZE: int = 40
+    INGESTOR_BATCH_SIZE: int = 50
     INGESTOR_CONCURRENCY: int = 1
-    INGESTOR_RATE_LIMIT: float = 1.0
+    INGESTOR_RATE_LIMIT: float = 0.60
     INGESTOR_SLEEP_SEC: int = 30
 
 

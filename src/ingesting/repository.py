@@ -1,10 +1,10 @@
 from typing import List, Dict, Any
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, update, and_
+from sqlalchemy import select, update, and_, or_  # <--- Добавлен or_
 from sqlalchemy.dialects.postgresql import insert as pg_insert
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta  # <--- Добавлена timedelta
 
-# Импортируем только нужные модели. MarketHistory убрана.
+# Импортируем только нужные модели.
 from src.db.models import TrackedItem, Location, MarketPrice, Item
 
 
@@ -24,13 +24,34 @@ class IngestorRepository:
         result = await self.session.execute(stmt)
         return {row.unique_name: row.id for row in result.all()}
 
-    async def get_outdated_items(self, batch_size: int) -> Dict[str, List[str]]:
-        """Возвращает словарь {location_api_name: [item_unique_name, ...]}"""
+    async def get_outdated_items(
+        self,
+        batch_size: int,
+        min_update_interval: timedelta  # <--- Новый аргумент
+    ) -> Dict[str, List[str]]:
+        """
+        Возвращает предметы, которые не обновлялись дольше, чем min_update_interval.
+        """
+        # Вычисляем время, раньше которого данные считаются "протухшими"
+        # Используем UTC, так как в БД храним timezone-aware datetime
+        threshold_time = datetime.now(timezone.utc) - min_update_interval
+
         stmt = (
             select(Item.unique_name, Location.api_name)
             .join(TrackedItem, TrackedItem.item_id == Item.id)
             .join(Location, TrackedItem.location_id == Location.id)
-            .where(TrackedItem.is_active == True)
+            .where(
+                and_(
+                    TrackedItem.is_active == True,
+                    # Условие: Либо last_check пуст (никогда не проверяли),
+                    # Либо last_check меньше (старее), чем пороговое время
+                    or_(
+                        TrackedItem.last_check == None,
+                        TrackedItem.last_check < threshold_time
+                    )
+                )
+            )
+            # Сортируем: сначала NULL (самые приоритетные), потом самые старые
             .order_by(TrackedItem.last_check.asc().nulls_first())
             .limit(batch_size)
         )

@@ -47,19 +47,20 @@ services:
       db:
         condition: service_healthy # Ждем, пока БД реально запустится
 
-  # --- 4. Worker (Ingestor) ---
+  # --- 4. Worker (Ingestor) [UPDATED] ---
   worker:
     build: .
     container_name: albion_worker
-    # Запускает скрипт воркера (пока заглушка, позже заменим на реальный файл)
-    command: python -m src.services.ingesting
+    # Запускаем как модуль, чтобы работали абсолютные импорты (from src...)
+    command: python -m src.worker
     volumes:
-      - ./src:/app/src
+      - ./src:/app/src # Hot Reload кода для разработки
     env_file:
       - .env
     environment:
       - DB_HOST=db
+      - PYTHONUNBUFFERED=1 # Чтобы логи сразу летели в stdout
     depends_on:
       db:
-        condition: service_healthy
-    # worker не открывает порты наружу, он работает внутри сети
+        condition: service_healthy # Ждем полной готовности БД
+    restart: unless-stopped
