@@ -4,7 +4,6 @@ from sqlalchemy.orm import joinedload
 from typing import Optional, List
 
 from src.db.models import Location, Item, TrackedItem, MarketPrice
-# Сюда можно импортировать схемы, если нужно типизировать входные данные для create/update
 from src.schemas import TrackedItemCreate
 
 # --- Locations ---
@@ -19,7 +18,6 @@ async def get_location_by_api_name(db: AsyncSession, api_name: str) -> Optional[
 
 # --- Items ---
 async def search_items_by_name(db: AsyncSession, q: str, limit: int = 20) -> list[Item]:
-    # Безопасный поиск через ORM
     query = select(Item).where(
         Item.unique_name.ilike(f"%{q}%") | Item.display_name.ilike(f"%{q}%")
     ).limit(limit)
@@ -45,13 +43,11 @@ async def create_tracked_item(db: AsyncSession, item: Item, location: Location) 
     db.add(new_track)
     await db.commit()
     await db.refresh(new_track)
-    # Ручная подвязка для возврата в Pydantic (решение проблемы Lazy Load)
     new_track.item = item
     new_track.location = location
     return new_track
 
 async def get_all_tracked_items(db: AsyncSession) -> list[TrackedItem]:
-    # Используем joinedload для оптимизации (Eager Loading)
     query = select(TrackedItem).options(
         joinedload(TrackedItem.item),
         joinedload(TrackedItem.location)

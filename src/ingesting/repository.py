@@ -12,13 +12,13 @@ class IngestorRepository:
         self.session = session
 
     async def get_location_map(self) -> Dict[str, int]:
-        """Кэш локаций: api_name -> id"""
+        """Location cache: api_name -> id"""
         stmt = select(Location.api_name, Location.id)
         result = await self.session.execute(stmt)
         return {row.api_name: row.id for row in result.all()}
 
     async def get_item_map(self, unique_names: List[str]) -> Dict[str, int]:
-        """Получает ID предметов по их уникальным именам (T4_BAG -> 55)."""
+        """Get item id by unique name (T4_BAG -> 55)."""
         stmt = select(Item.unique_name, Item.id).where(Item.unique_name.in_(unique_names))
         result = await self.session.execute(stmt)
         return {row.unique_name: row.id for row in result.all()}
@@ -29,10 +29,9 @@ class IngestorRepository:
             min_update_interval: timedelta
     ) -> Dict[str, List[str]]:
         """
-        Возвращает мапу {location_api_name: [item_unique_name, ...]}.
-        Выбираем TrackedItems, у которых last_check старый или None.
+        Returns a map {location_api_name: [item_unique_name, ...]}.
+        Select TrackedItems where last_check is old or None.
         """
-        # Считаем "протухшим" временем: сейчас - интервал
         cutoff_time = datetime.now(timezone.utc) - min_update_interval
 
         stmt = (
@@ -68,24 +67,20 @@ class IngestorRepository:
             location_id: int
     ) -> None:
         """
-        Сохраняет цены и обновляет время проверки у предметов.
-        Транзакционно.
+        Saves prices and updates the verification time for items.
+        Transactional.
         """
 
-        # --- ИСПРАВЛЕНИЕ ОШИБКИ ТРАНЗАКЦИЙ ---
-        # Проверяем, не открыта ли уже транзакция (неявная от SELECT).
-        # Если да - коммитим её, чтобы начать чистый блок begin().
         if self.session.in_transaction():
             await self.session.commit()
-        # -------------------------------------
 
         async with self.session.begin():
-            # 1. Сначала нужно получить ID предметов
+            # 1. id of items
             all_names = set(items_checked)
             for p in prices_data:
                 all_names.add(p['item_id'])
 
-            # Преобразуем set в list для in_
+            # set in list for in_
             name_to_id_map = await self.get_item_map(list(all_names))
 
             # 2. Upsert Prices
@@ -118,8 +113,8 @@ class IngestorRepository:
                 )
                 await self.session.execute(stmt_price)
 
-            # 3. Обновляем Tracked Items (время проверки)
-            # Берем только те предметы, которые реально существуют в items
+            # 3. Update Tracked Items
+            # only existing items
             tracked_ids_int = [name_to_id_map[name] for name in items_checked if name in name_to_id_map]
 
             if tracked_ids_int:

@@ -25,8 +25,6 @@ class IngestorService:
         self.config = config
 
         # Rate Limiter:
-        # Если передан извне (Singleton в воркере) — используем его.
-        # Если нет (например, в тестах) — создаем локальный.
         if limiter:
             self.limiter = limiter
         else:
@@ -36,7 +34,7 @@ class IngestorService:
         self.running = True
 
     async def _init_cache(self):
-        """Загрузка кэша локаций."""
+        """Load location cache"""
         self._location_map = await self.repository.get_location_map()
         # Логируем только если кэш пуст или при старте, чтобы не спамить в цикле воркера
         if not self._location_map:
@@ -44,7 +42,7 @@ class IngestorService:
 
     async def start(self, location_api_name: str, items: List[str]):
         """
-        Точка входа для обработки одной локации.
+        Entry point for processing a single location
         """
         await self._init_cache()
         await self._process_location(location_api_name, items)
@@ -55,7 +53,6 @@ class IngestorService:
             logger.error(f"Location '{city_api_name}' not found in cache. Skipping.")
             return
 
-        # SC-04: Batching Strategy.
         batches = [
             items[i: i + self.config.batch_size]
             for i in range(0, len(items), self.config.batch_size)
@@ -67,18 +64,17 @@ class IngestorService:
         for batch in batches:
             tasks.append(self._process_batch(batch, city_api_name, location_id))
 
-        # Семафор для ограничения конкурентности внутри одного вызова start
         concurrency_sem = asyncio.Semaphore(self.config.concurrency)
 
         async def sem_task(task):
             async with concurrency_sem:
                 return await task
 
-        # Запускаем задачи. RateLimit контролируется self.limiter внутри _process_batch
+        # RateLimit controled self.limiter in _process_batch
         await asyncio.gather(*(sem_task(t) for t in tasks))
 
     async def _process_batch(self, batch_items: List[str], city_api_name: str, location_id: int):
-        # SC-03: Rate Limiting. Ждем токен из глобального ведра.
+        # SC-03: Rate Limiting. Wait for token from global bucket.
         async with self.limiter:
             try:
                 # A: Network
@@ -88,7 +84,7 @@ class IngestorService:
                 prices_data = self.processor.process(raw_dtos)
 
                 # C: DB
-                # Сохраняем результат или обновляем время проверки, даже если данных нет
+                # Save or update check time
                 await self.repository.save_batch_results(
                     prices_data,
                     batch_items,

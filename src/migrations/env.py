@@ -23,7 +23,6 @@ if config.config_file_name is not None:
 # Inject Database URL
 config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
 
-# Указываем метаданные наших моделей
 target_metadata = Base.metadata
 
 
@@ -50,7 +49,7 @@ def do_run_migrations(connection: Connection) -> None:
 
 async def run_migrations_online() -> None:
     """Run migrations in 'online' mode using async engine."""
-    # Создаем асинхронный движок, используя конфиг Alembic (куда мы уже подсунули URL)
+    # Create async engine
     connectable = async_engine_from_config(
         config.get_section(config.config_ini_section, {}),
         prefix="sqlalchemy.",

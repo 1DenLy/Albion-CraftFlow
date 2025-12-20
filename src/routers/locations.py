@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from src.db.database import get_db
 from src import crud, schemas
 
-# Создаем отдельный роутер для локаций
+# Create router for locations
 router = APIRouter(
     prefix="/locations",
     tags=["References"]
@@ -11,5 +11,5 @@ router = APIRouter(
 
 @router.get("", response_model=list[schemas.LocationRead])
 async def get_locations(db: AsyncSession = Depends(get_db)):
-    """Получить список всех городов."""
+    """Get all locations"""
     return await crud.get_all_locations(db)

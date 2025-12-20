@@ -16,7 +16,7 @@ class SeedingManager:
         self.settings = settings
         self.logger = logging.getLogger(__name__)
 
-        # Инициализация конфигурации сидинга из основных настроек
+        # Initializing the seating configuration from the basic settings
         self.config = SeedingConfig(
             items_source_url=settings.SEED_ITEMS_URL,
             seed_min_tier=settings.SEED_MIN_TIER,
@@ -30,7 +30,7 @@ class SeedingManager:
             # 1. Seed Items
             await self._seed_items()
 
-            # 2. Seed Locations (НОВЫЙ ШАГ)
+            # 2. Seed Locations
             await self._seed_locations()
 
             # 3. Seed Tracked Items

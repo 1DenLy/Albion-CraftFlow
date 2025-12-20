@@ -5,20 +5,18 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    # --- ОБЩИЕ НАСТРОЙКИ ---
+    # --- Basic Settings ---
     MODE: Literal["DEV", "TEST", "PROD"] = "DEV"
     LOG_LEVEL: Literal["DEBUG", "INFO", "WARNING", "ERROR"] = "INFO"
 
-
-    # --- НАСТРОЙКИ БАЗЫ ДАННЫХ (PostgreSQL) ---
+    # --- Data Base Settings (PostgreSQL) ---
     DB_HOST: str
     DB_PORT: int = 5432
     DB_USER: str
     DB_PASS: SecretStr
     DB_NAME: str
 
-
-    # SEEDING (Наполнение базы) ---
+    # SEEDING ---
     SEED_ITEMS_URL: str = "https://raw.githubusercontent.com/broderickhyman/ao-bin-dumps/master/formatted/items.json"
     SEED_MIN_TIER: int = 4
     SEED_MAX_TIER: int = 8
@@ -42,13 +40,12 @@ class Settings(BaseSettings):
         return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS.get_secret_value()}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
 
 
-    # --- КОНФИГУРАЦИЯ ЗАГРУЗКИ ---
+    # --- Start Settings ---
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
         extra="ignore"
     )
-
 
 
 @lru_cache

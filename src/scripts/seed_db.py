@@ -4,14 +4,9 @@ import sys
 from pathlib import Path
 
 import logging
-
-# --- ВСТАВЛЯЕМ СЮДА ---
-# Отключаем вывод SQL-запросов (оставляем только WARNING и ERROR)
 logging.getLogger("sqlalchemy.engine").setLevel(logging.WARNING)
-# ---------------------
 
-# Добавляем корневую директорию проекта в sys.path, чтобы Python видел пакет src
-# Это позволяет запускать скрипт как файл: python src/scripts/seed_db.py
+
 sys.path.append(str(Path(__file__).resolve().parents[2]))
 
 from src.db.database import async_session_maker
@@ -19,8 +14,6 @@ from src.config import get_settings
 from src.seeding.manager import SeedingManager
 
 
-
-# Настройка простого логирования для скрипта
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"

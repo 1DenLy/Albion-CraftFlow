@@ -14,7 +14,7 @@ async def get_item_prices(
         item_unique_name: str,
         db: AsyncSession = Depends(get_db)
 ):
-    """Получить цены на конкретный предмет."""
+    """Get prices for a specific item."""
     item = await crud.get_item_by_unique_name(db, item_unique_name)
 
     if not item:

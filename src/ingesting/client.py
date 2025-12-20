@@ -32,8 +32,7 @@ class AlbionApiClient(IAlbionApiClient):
     )
     async def fetch_prices(self, items: List[str], location: str) -> List[AlbionPriceDTO]:
         """
-        Запрашивает цены для списка предметов.
-        Предполагается, что items уже разбит на допустимые батчи вызывающей стороной.
+        Fetches prices for a list of items from the Albion API.
         """
         if not items:
             return []
@@ -41,7 +40,7 @@ class AlbionApiClient(IAlbionApiClient):
         items_str = ",".join(items)
         url = f"{self.base_url}/stats/prices/{items_str}"
 
-        # Params. В реальности API может требовать locations и qualities как query params
+        # Params.
         params = {
             "locations": location,
             "qualities": "1,2,3,4,5"
@@ -52,7 +51,7 @@ class AlbionApiClient(IAlbionApiClient):
                 response = await client.get(url, params=params)
 
                 if response.status_code == 404:
-                    # API может вернуть 404, если данных нет вообще
+                    # API returns 404 if no data is available
                     logger.warning(f"Albion API returned 404 for batch starting with {items[0]}")
                     return []
 
@@ -63,11 +62,11 @@ class AlbionApiClient(IAlbionApiClient):
                 response.raise_for_status()
                 data = response.json()
 
-                # Валидация через Pydantic
+                # Pydantic validation
                 return [AlbionPriceDTO.model_validate(item) for item in data]
 
             except httpx.HTTPStatusError as e:
-                # 404 обрабатываем мягко, 429 и 5xx вызовут retry
+                # 404, 429 and 5xx are handled by retry
                 if e.response.status_code == 404:
                     return []
                 logger.error(f"HTTP error fetching prices: {e}")

@@ -10,9 +10,9 @@ router = APIRouter(
 
 @router.get("", response_model=list[schemas.ItemRead])
 async def search_items(
-    q: str = Query(..., min_length=2, description="Поиск по имени (напр. 'BAG')"),
+    q: str = Query(..., min_length=2, description="Search items by name ('BAG')"),
     limit: int = Query(20, le=100),
     db: AsyncSession = Depends(get_db)
 ):
-    """Поиск предметов по имени."""
+    """Search items by name"""
     return await crud.search_items_by_name(db, q, limit)

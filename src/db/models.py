@@ -105,13 +105,9 @@ class MarketHistory(Base):
 
 
 class TrackedItem(Base):
-    """
-    Таблица для Воркера.
-    Определяет КОНКРЕТНУЮ связку Предмет + Город, которую надо обновлять.
-    """
     __tablename__ = "tracked_items"
 
-    # первичный ключ составной: (Предмет + Город).
+    # ForeignKey + Primary Key (Composite Key)
     item_id: Mapped[int] = mapped_column(ForeignKey("items.id", ondelete="CASCADE"), primary_key=True)
     location_id: Mapped[int] = mapped_column(ForeignKey("locations.id", ondelete="CASCADE"), primary_key=True)
 

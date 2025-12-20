@@ -49,11 +49,10 @@ class BaseSeeder(ABC, Generic[T]):
                 if not batch:
                     continue
 
-                # Создаем insert statement
+                # Create insert statement
                 model = self.get_model()
                 stmt = pg_insert(model).values(batch)
 
-                # Применяем стратегию разрешения конфликтов
                 stmt = self.get_conflict_statement(stmt)
 
                 await self.session.execute(stmt)

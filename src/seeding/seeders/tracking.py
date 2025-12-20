@@ -7,7 +7,6 @@ from src.db.models import TrackedItem
 
 class TrackedItemsSeeder(BaseSeeder[Dict[str, List[int]]]):
     def __init__(self, session, provider: IDataProvider):
-        # Увеличиваем батч, так как записи легкие
         super().__init__(session, batch_size=5000)
         self.provider = provider
 
@@ -21,7 +20,6 @@ class TrackedItemsSeeder(BaseSeeder[Dict[str, List[int]]]):
         if not item_ids or not location_ids:
             return []
 
-        # Декартово произведение (Items x Locations)
         pairs = itertools.product(item_ids, location_ids)
 
         return [

@@ -20,22 +20,22 @@ class ItemsSeeder(BaseSeeder[List[Dict[str, Any]]]):
 
         for entry in raw_data:
             try:
-                # 1. Валидация через Pydantic
+                # 1. Pydantic validation
                 item_model = ItemDTO.model_validate(entry)
 
-                # --- ЛОГИКА ОПРЕДЕЛЕНИЯ ИМЕНИ ---
-                # Если base_name нет (оно None из DTO), берем display_name, иначе unique_name
+                # --- LOGIC FOR DETERMINING THE NAME ---
+                # If base_name is not present (it is None from DTO), we take display_name, otherwise unique_name
                 final_base_name = item_model.base_name
                 if not final_base_name:
                     final_base_name = item_model.display_name or item_model.unique_name
 
-                # 2. Формируем словарь. ВАЖНО: поле 'tier' обязательно для БД!
+                # 2. Create a dictionary. IMPORTANT: the ‘tier’ field is mandatory for the database!
                 clean_item = {
                     "unique_name": item_model.unique_name,
                     "display_name": item_model.display_name,
                     "base_name": final_base_name,
-                    "tier": item_model.tier,  # <--- Теперь это свойство есть в DTO
-                    "enchantment_level": item_model.enchantment_level, # <--- И это тоже
+                    "tier": item_model.tier,
+                    "enchantment_level": item_model.enchantment_level,
                 }
 
                 cleaned_items.append(clean_item)

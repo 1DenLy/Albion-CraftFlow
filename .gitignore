@@ -164,3 +164,4 @@ cython_debug/
 
 pg_data/*
 trash/*
+/trash/

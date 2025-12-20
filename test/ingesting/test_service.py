@@ -50,7 +50,7 @@ def service(client, mock_repo, mock_processor, mock_config):
 @pytest.mark.asyncio
 async def test_sc01_contract_validation(client, mock_config):
     """
-    SC-01: Валидация формирования запроса (Contract Testing)
+    SC-01: Contract Validation
     """
     items = ["T4_BAG", "T5_BAG"]
     location = "Lymhurst"
@@ -74,12 +74,12 @@ async def test_sc01_contract_validation(client, mock_config):
 @pytest.mark.asyncio
 async def test_sc02_resilience_retries(client, mock_config):
     """
-    SC-02: Устойчивость к ошибкам и Retries
+    SC-02: Resilience Retries
     """
     items = ["T4_BAG"]
 
     async with respx.mock(base_url=mock_config.albion_api_url) as respx_mock:
-        # Mock возвращает 429, потом 502, потом 200 OK
+        # Mock returns 429, then 502, then 200 OK
         route = respx_mock.get(f"/stats/prices/{items[0]}").mock(
             side_effect=[
                 httpx.Response(429),
@@ -98,15 +98,15 @@ async def test_sc02_resilience_retries(client, mock_config):
 @pytest.mark.asyncio
 async def test_sc03_rate_limiting(service, mock_config, mock_repo):
     """
-    SC-03: Проверка Rate Limiter (отсутствие берстов)
-    Конфиг: max_rate=10/sec (1 запрос каждые 100мс).
-    Обрабатываем 50 предметов с batch_size=1 -> 50 запросов.
-    Ожидаемое время >= 50 / 10 = 5.0 сек.
+    SC-03: Rate Limiter check (no bursts)
+    Config: max_rate=10/sec (1 request every 100 ms).
+    Processing 50 items with batch_size=1 -> 50 requests.
+    Expected time >= 50 / 10 = 5.0 sec.
     """
     # Override config for this test
     service.config.max_rate = 10.0
     service.config.batch_size = 1
-    # Пересоздаем лимитер с новым конфигом
+
     from aiolimiter import AsyncLimiter
     service.limiter = AsyncLimiter(max_rate=10.0, time_period=1.0)
 
@@ -123,8 +123,7 @@ async def test_sc03_rate_limiting(service, mock_config, mock_repo):
 
         duration = end_time - start_time
 
-        # 50 запросов при 10/сек должны занять минимум 4.5-5 сек (с учетом погрешности)
-        # Если бы не было лимитера, respx ответил бы за миллисекунды.
+
         assert duration >= 4.5
         assert mock_repo.save_batch_results.call_count == 50
 
@@ -132,22 +131,20 @@ async def test_sc03_rate_limiting(service, mock_config, mock_repo):
 @pytest.mark.asyncio
 async def test_sc04_batching_strategy(service, mock_config, mock_repo):
     """
-    SC-04: Batching Strategy (Разбивка запросов во избежание URI Too Long)
-    Вход: 200 предметов. Batch Size: 50.
-    Ожидаем: 4 запроса к клиенту.
+    SC-04: Batching Strategy (Breaking down requests to avoid URI Too Long)
+    Input: 200 items. Batch Size: 50.
+    Expected: 4 requests to the client.
     """
     service.config.batch_size = 50
     items = [f"Item_{i}" for i in range(200)]
 
-    # Mock Client метод fetch_prices чтобы проверить, с какими аргументами он вызывался
-    # (Мы тестируем логику сервиса по разбивке, а не HTTP слой здесь)
     service.client.fetch_prices = AsyncMock(return_value=[])
 
     await service.start("Lymhurst", items)
 
     assert service.client.fetch_prices.call_count == 4
 
-    # Проверка, что в каждом вызове не более 50 предметов
+    # Verify that each call contains no more than 50 items
     for call in service.client.fetch_prices.call_args_list:
         args, _ = call
         batch_items = args[0]
