@@ -6,7 +6,7 @@ ENV PYTHONPATH /app
 
 WORKDIR /app
 
-# Створюємо системного користувача 'appuser'
+# Create a system user 'appuser'
 RUN adduser --system --no-create-home appuser
 
 COPY requirements.txt .
@@ -14,10 +14,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Змінюємо власника файлів (щоб appuser міг читати/писати якщо треба)
+# Change the owner of the files (so that appuser can read/write if necessary)
 RUN chown -R appuser:nogroup /app
 
-# Перемикаємось на користувача
+# Switching to user
 USER appuser
 
 CMD ["python", "src/main.py"]

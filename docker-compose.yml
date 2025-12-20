@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  # --- 1. База Данных (PostgreSQL) ---
+  # --- 1. (PostgreSQL) ---
   db:
     image: postgres:16-alpine
     container_name: albion_db
@@ -11,22 +11,22 @@ services:
       POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_DB: ${DB_NAME}
     ports:
-      - "5432:5432" # Открываем порт наружу, чтобы ты мог подключиться через DBeaver/PyCharm
+      - "5432:5432" # We open the port to the outside so that you can connect via DBeaver/PyCharm.
     volumes:
-      - ./pg_data:/var/lib/postgresql/data # Сохраняем данные на диске, чтобы они не исчезли при перезапуске
+      - ./pg_data:/var/lib/postgresql/data # We save data to disk so that it does not disappear when restarting.
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
       interval: 5s
       timeout: 5s
       retries: 5
 
-  # --- 2. GUI для Базы Данных (Adminer) ---
+  # --- 2. GUI for db (Adminer) ---
   adminer:
     image: adminer
     container_name: albion_adminer
     restart: always
     ports:
-      - "8080:8080" # Будет доступен в браузере по http://localhost:8080
+      - "8080:8080" # http://localhost:8080
     depends_on:
       - db
 
@@ -36,7 +36,7 @@ services:
     container_name: albion_api
     command: uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
     volumes:
-      - ./src:/app/src # "Hot Reload": меняешь код локально — он обновляется в контейнере
+      - ./src:/app/src # "Hot Reload": change the code locally — it is updated in the container
     ports:
       - "8000:8000"
     env_file:
@@ -45,22 +45,22 @@ services:
       - DB_HOST=db
     depends_on:
       db:
-        condition: service_healthy # Ждем, пока БД реально запустится
+        condition: service_healthy # We are waiting for the database to actually start up.
 
-  # --- 4. Worker (Ingestor) [UPDATED] ---
+  # --- 4. Worker (Ingestor) ---
   worker:
     build: .
     container_name: albion_worker
-    # Запускаем как модуль, чтобы работали абсолютные импорты (from src...)
+    # Run as a module so that absolute imports (from src...) work.
     command: python -m src.worker
     volumes:
-      - ./src:/app/src # Hot Reload кода для разработки
+      - ./src:/app/src # Hot Reload for develop
     env_file:
       - .env
     environment:
       - DB_HOST=db
-      - PYTHONUNBUFFERED=1 # Чтобы логи сразу летели в stdout
+      - PYTHONUNBUFFERED=1 # To send logs directly to stdout
     depends_on:
       db:
-        condition: service_healthy # Ждем полной готовности БД
+        condition: service_healthy # Waiting for the database to be fully ready
     restart: unless-stopped
